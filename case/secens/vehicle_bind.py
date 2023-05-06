@@ -26,6 +26,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
         res_json = res.json()
         logger().info("输出注册车辆接口响应数据：{}".format(res_json))
         # 断言走分支
+
         try:
             responseCode = res_json.get("code")
             assert responseCode == 200
@@ -39,8 +40,9 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             re_up = requests.post(url=url_vin_update, json=body, headers=header)
             re_up_json = re_up.json()
 
-            code = re_up_json.get("code")
+            # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
 
+            code = re_up_json.get("code")
             # code=200注册成功，code=400，走修改绑定，再次注册
             if code == 200:
                 logger().info("---断言修改车辆信息结果，预期修改成功，输出结果：{}")
