@@ -4,8 +4,7 @@ import logging
 from logging import handlers
 import sys
 
-from numpy import random
-
+import random
 dirname, filename = os.path.split(os.path.abspath(sys.argv[0]))
 LOG_ROOT = dirname
 
