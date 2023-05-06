@@ -39,8 +39,9 @@ def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
 	"""
     tbox_regis.tbox_regis(iccid)
     cdu_regis.cdu_regis(cduid)
-    vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
-    return {"code": 200, "message": "VIN登记成功,修改vin注册成功", "data": {"result": "VIN登记成功,修改vin注册成功"}}
+    # vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
+    resp = vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
+    return resp
 
 
 
