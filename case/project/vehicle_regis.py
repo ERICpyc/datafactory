@@ -82,9 +82,11 @@ def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
             assert responseCode == 400
             logging.info("TBOX注册失败，断言失败情况，TBOX已存在：{}")
             logging.info("TBOX信息存在，跳过tbox注册！！！")
+            return {"code": 400, "message": "登记失败，TBOX已存在", "data": {"result": "登记成功，TBOX已存在"}}
     except Exception as e:
         logging.info("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
         logging.info("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
+        return {"code": 500, "message": "登记失败，TBOX信息异常", "data": {"result": "登记失败，TBOX信息异常"}}
 
 if __name__ == "__main__":
     vehicle_regis(iccid='89861121290032272065',vin='L1NNSGHB5NA000344',cduid='XPENGE380700354739011035',vehicleTypeCode='EA')
