@@ -62,7 +62,7 @@ def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
 
 
     body = {
-        "iccid": "{}".format(iccid),
+        "iccid": "{}".format(cduid),
         "partsNo": 121212
     }
     try:
