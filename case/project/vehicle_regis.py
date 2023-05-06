@@ -6,15 +6,15 @@ from case.project.test import get_logger
 
 def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
     """
-	@api {post} /vehicle_regis 车辆登记
+	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
 	@apiGroup 项目
 	@apiName vehicle_regis
 	@apiDescription  适用于E38,E28A,F30及后续车型
 	@apiPermission long
-	@apiParam {String} vin=xxx 车辆vin
-	@apiParam {String} cduid=xxx cduid
-	@apiParam {String} iccid=xxx iccid
-	@apiParam {String} vehicleTypeCode=xxx typecode
+	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
+	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
+	@apiParam {String} iccid=89861121290032272XXX 20位TBOX编号
+	@apiParam {String} vehicleTypeCode=EA 车型编码EA,EF。。
 	@apiParamExample {json} 请求示例:
 	{
 	     "vin": "L1NSPGE3812345678",
@@ -87,6 +87,8 @@ def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
         logging.info("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
         logging.info("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
         return {"code": 500, "message": "登记失败，TBOX信息异常", "data": {"result": "登记失败，TBOX信息异常"}}
+
+
 
 if __name__ == "__main__":
     vehicle_regis(iccid='89861121290032272065',vin='L1NNSGHB5NA000344',cduid='XPENGE380700354739011035',vehicleTypeCode='EA')
