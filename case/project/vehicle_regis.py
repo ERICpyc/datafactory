@@ -6,7 +6,7 @@ from case.secens.utiles import logger,vmp_cookie
 
 
 
-def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
+def vehicle_regis(vin = '', cduid = '', iccid = '', vehicleTypeCode = ''):
     """
 	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
 	@apiGroup 项目
