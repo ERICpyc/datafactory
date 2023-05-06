@@ -50,5 +50,6 @@ def vehicle_regis(vin = '', cduid = '', iccid = '', vehicleTypeCode = ''):
 
 
 
+
 if __name__ == "__main__":
     vehicle_regis(iccid='89861121290032272080',cduid= 'XPENGE380700354739011050', vin= 'L1NNSGHB5NA000347',vehicleTypeCode='FA')
