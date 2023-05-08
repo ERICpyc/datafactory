@@ -1,12 +1,9 @@
 # -*- coding:utf-8 -*-
-import requests
 
 from case.secens import tbox_regis,cdu_regis,vehicle_bind
-from case.secens.utiles import logger,vmp_cookie
+from base.utiles import ran_vin,ran_cduid,ran_iccid
 
-
-
-def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
+def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ran_iccid):
     """
 	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
 	@apiGroup 项目
@@ -50,4 +47,4 @@ def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
 
 
 if __name__ == "__main__":
-    vehicle_regis(iccid='89861121290032272080',cduid= 'XPENGE380700354739011050', vin= 'L1NNSGHB5NA000347',vehicleTypeCode='FA')
+    vehicle_regis(vehicleTypeCode='FA')

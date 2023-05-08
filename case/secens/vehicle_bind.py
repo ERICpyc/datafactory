@@ -1,5 +1,5 @@
 import requests
-from case.secens.utiles import logger, vmp_cookie, ob_value_choice
+from base.utiles import logger, vmp_cookie, ob_value_choice
 
 
 def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
@@ -30,7 +30,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
         try:
             responseCode = res_json.get("code")
             assert responseCode == 200
-            logger().info("---注册车辆成功，输出断言结果：{}！！！")
+            logger().info(f"---注册车辆成功，输出断言结果：{vin}！！！")
             return {"code": 200, "message": "VIN登记成功", "data": {"result": "VIN登记成功"}}
         except:
             responseCode = res_json.get("code")
@@ -39,13 +39,12 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             logger().info("车辆信息存在，走修改车辆接口！！！")
             re_up = requests.post(url=url_vin_update, json=body, headers=header)
             re_up_json = re_up.json()
-
             # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
 
             code = re_up_json.get("code")
             # code=200注册成功，code=400，走修改绑定，再次注册
             if code == 200:
-                logger().info("---断言修改车辆信息结果，预期修改成功，输出结果：{}")
+                logger().info(f"---断言修改车辆信息结果，预期修改成功，输出结果：{vin}")
             else:
                 # 可能是大屏已存在绑定车辆的情况，给一个大屏随机绑定占用信息的vin，在注册信息
                 logger().info("!!!导致注册车辆失败的原因，是大屏已存在！！！")
@@ -88,7 +87,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                 try:
                     responseCode = res_json.get("code")
                     assert responseCode == 200
-                    logger().info("---修改信息成功后，重新执行注册车辆成功：{}！！！")
+                    logger().info(f"---修改信息成功后，重新执行注册车辆成功：{vin}！！！")
                     return {"code": 200, "message": "VIN登记成功,修改cduid注册成功", "data": {"result": "VIN登记成功,修改cduid注册成功"}}
                 except:
                     responseCode = res_json.get("code")
@@ -97,7 +96,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     re_up = requests.post(url=url_vin_update, json=body, headers=header)
                     re_up_json1 = re_up.json()
                     logger().info(
-                        "---重走修改接口，修改注册车辆信息成功：{}！！！")
+                        f"---重走修改接口，修改注册车辆信息成功：{vin}！！！")
                     return {"code": 200, "message": "VIN登记成功,修改vin注册成功", "data": {"result": "VIN登记成功,修改vin注册成功"}}
                     # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
 

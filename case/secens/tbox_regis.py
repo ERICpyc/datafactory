@@ -1,6 +1,6 @@
 import requests
 
-from case.secens.utiles import logger, vmp_cookie
+from base.utiles import logger, vmp_cookie
 
 def tbox_regis(iccid):
     header = {
@@ -30,7 +30,7 @@ def tbox_regis(iccid):
         try:
             responseCode = res_json.get("code")
             assert responseCode == 200
-            logger().info("---注册TBOX成功，输出断言结果：{}！！！")
+            logger().info(f"---注册TBOX成功，输出断言结果：{iccid}！！！")
             return {"code": 200, "message": "ICCID登记成功", "data": {"result": "ICCID登记成功"}}
         except:
             responseCode = res_json.get("code")

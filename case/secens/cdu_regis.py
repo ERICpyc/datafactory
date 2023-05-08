@@ -1,6 +1,6 @@
 import requests
 
-from case.secens.utiles import logger, vmp_cookie
+from base.utiles import logger, vmp_cookie
 
 def cdu_regis(cduid):
     header = {
@@ -23,7 +23,7 @@ def cdu_regis(cduid):
         try:
             responseCode = res_json.get("code")
             assert responseCode == 200
-            logger().info("---注册大屏成功，输出断言结果：！！！")
+            logger().info(f"---注册大屏成功，输出断言结果：{cduid}！！！")
             return {"code": 200, "message": "CDUID登记成功", "data": {"result": "CDUID登记成功"}}
         except:
             responseCode = res_json.get("code")

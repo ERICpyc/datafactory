@@ -44,3 +44,19 @@ def ob_value_choice(st, a):
     # print(str2)
     return str2
 
+def random_veh():
+    up_words = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    low_words = '012345678901234567890'
+    ran_vin = 'TEST'+''.join(random.sample(up_words,13))
+    ran_cduid = 'TESTCDU'+''.join(random.sample(up_words,16))
+    ran_iccid = '89t' +''.join(random.sample(low_words,17))
+    return ran_iccid,ran_vin,ran_cduid
+
+out = random_veh()
+ran_iccid = out[0]
+ran_vin = out[1]
+ran_cduid = out[2]
+# print(ran_vin)
+# print(ran_cduid)
+# print(ran_iccid)
+
