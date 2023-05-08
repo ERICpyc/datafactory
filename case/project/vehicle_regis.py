@@ -39,7 +39,6 @@ def vehicle_regis(vin: str, cduid: str, iccid: str, vehicleTypeCode: str):
 	"""
     tbox_regis.tbox_regis(iccid)
     cdu_regis.cdu_regis(cduid)
-    # vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
     ret = vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
     return ret
 
