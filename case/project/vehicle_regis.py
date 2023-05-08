@@ -10,9 +10,9 @@ def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ra
 	@apiName vehicle_regis
 	@apiDescription  适用于E38,E28A,F30及后续车型，若需要随机生成车辆参数，只填写车型即可
 	@apiPermission long
-	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
-	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
-	@apiParam {String} iccid=89861121290032272XXX 20位TBOX编号
+	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
+	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
+	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
 	@apiParam {String} vehicleTypeCode=EA 车型编码EA,EF。。
 	@apiParamExample {json} 请求示例:
 	{
@@ -47,4 +47,4 @@ def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ra
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='FA')
+    vehicle_regis(vehicleTypeCode='EA')
