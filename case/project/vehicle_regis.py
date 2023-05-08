@@ -8,7 +8,7 @@ def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ra
 	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
 	@apiGroup 项目
 	@apiName vehicle_regis
-	@apiDescription  适用于E38,E28A,F30及后续车型，**若需要随机生成车辆参数，只填写车型即可**
+	@apiDescription  适用于E38,E28A,F30及后续车型，若需要随机生成车辆参数，只填写车型即可
 	@apiPermission long
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
