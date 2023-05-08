@@ -3,7 +3,7 @@ def old_model_veh_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, icc
     """
 	@api {post} /old_model_veh_regis 车辆登记（适用于E28,D55,D21,D20车型）
 	@apiGroup 项目
-	@apiName vehicle_regis
+	@apiName old_model_veh_regis
 	@apiDescription  适用于E28,D55,D21,D20车型，**若需要随机生成车辆参数，只填写车型即可**
 	@apiPermission long
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
