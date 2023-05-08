@@ -1,25 +1,21 @@
-# -*- coding:utf-8 -*-
 
-from case.secens import tbox_regis,cdu_regis,vehicle_bind
-from base.utiles import ran_vin,ran_cduid,ran_iccid
-
-def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ran_iccid):
+def old_model_veh_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ran_iccid):
     """
-	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
+	@api {post} /old_model_veh_regis 车辆登记（适用于E28,D55,D21,D20车型）
 	@apiGroup 项目
 	@apiName vehicle_regis
-	@apiDescription  适用于E38,E28A,F30及后续车型，**若需要随机生成车辆参数，只填写车型即可**
+	@apiDescription  适用于E28,D55,D21,D20车型，**若需要随机生成车辆参数，只填写车型即可**
 	@apiPermission long
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
 	@apiParam {String} iccid=89861121290032272XXX 20位TBOX编号
-	@apiParam {String} vehicleTypeCode=EA 车型编码EA,EF。。
+	@apiParam {String} vehicleTypeCode=ED 车型编码ED,DF
 	@apiParamExample {json} 请求示例:
 	{
 	     "vin": "L1NSPGE3812345678",
 	     "cduid": "XPENGE380700354739011035",
 	     ”iccid“: "89861121290032272064",
-	     "vehicleTypeCode": "EA"
+	     "vehicleTypeCode": "ED"
 	  }
 	@apiSuccess (200) {Number} code=200 服务器码
 	@apiSuccess (200) {Object} data 造数成功返回相关的数据
@@ -34,17 +30,3 @@ def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ra
 	    }
 	}
 	"""
-    tbox_regis.tbox_regis(iccid)
-    cdu_regis.cdu_regis(cduid)
-    ret = vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
-    return ret
-
-
-
-
-
-
-
-
-if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='FA')
