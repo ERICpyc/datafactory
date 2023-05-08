@@ -103,4 +103,4 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
     except Exception as e:
         logger().error("---！！注册修改车辆都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改车辆都失败，输出异常vin：{}！！---".format(vin))
-        return {"code": 500, "message": "VIN登记异常", "data": {"result": "VIN登记异常"}}
+        return {"code": 500, "message": "VIN登记异常", "data": {"result": "VIN登记异常","vin":vin, "cduid": cduid, "iccid":iccid, "车型":vehicleTypeCode}}
