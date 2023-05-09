@@ -24,14 +24,15 @@ vmp_cookie = 'sidebarHide=1; appid=xp_entrance; uid=2000002; cookieVersion=; use
 
 def logger():
     logger = logging.getLogger()
-    logger.setLevel('DEBUG')
-    BASIC_FORMAT = "%(asctime)s:%(levelname)s:%(message)s"
-    DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
-    formatter = logging.Formatter(BASIC_FORMAT, DATE_FORMAT)
-    chlr = logging.StreamHandler()  # 输出到控制台的handler
-    chlr.setFormatter(formatter)
-    chlr.setLevel('INFO')  # 也可以不设置，不设置就默认用logger的level
-    logger.addHandler(chlr)
+    if len(logger.handlers) == 0:  # 只添加一个输出到控制台的handler
+        logger.setLevel('DEBUG')
+        BASIC_FORMAT = "%(asctime)s:%(levelname)s:%(message)s"
+        DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+        formatter = logging.Formatter(BASIC_FORMAT, DATE_FORMAT)
+        chlr = logging.StreamHandler()  # 输出到控制台的handler
+        chlr.setFormatter(formatter)
+        chlr.setLevel('INFO')  # 也可以不设置，不设置就默认用logger的level
+        logger.addHandler(chlr)
     return logger
 
 def ob_value_choice(st, a):

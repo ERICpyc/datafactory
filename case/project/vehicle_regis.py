@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 
-from case.secens import tbox_regis,cdu_regis,vehicle_bind
-from base.utiles import ran_vin,ran_cduid,ran_iccid
+from case.secens import tbox_regis, cdu_regis, vehicle_bind
+from base.utiles import ran_vin, ran_cduid, ran_iccid
+from base.utiles import logger
 
-def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ran_iccid):
+def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
     """
 	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
 	@apiGroup 项目
@@ -34,17 +35,36 @@ def vehicle_regis(vehicleTypeCode:str, vin= ran_vin, cduid= ran_cduid, iccid= ra
 	    }
 	}
 	"""
-    tbox_regis.tbox_regis(iccid)
-    cdu_regis.cdu_regis(cduid)
-    ret = vehicle_bind.vehicle_bind(iccid,cduid,vin,vehicleTypeCode)
-    return ret
+    veh_info = {"vin":"", "cduid":"", "iccid":"","vehicleTypeCode":""}
+    veh_info["vin"] = vin.strip()
+    veh_info["cduid"] = cduid.strip()
+    veh_info["iccid"] = iccid.strip()
+    veh_info["vehicleTypeCode"] = vehicleTypeCode.strip()
+    # empty_items = []
+    # not_empty_items = []
+    ran_value = [ran_vin,ran_cduid,ran_iccid]
+    for key,value in zip(['vin','cduid','iccid'],ran_value):
+        if not veh_info[key] or len(veh_info[key]) == 0:
+            veh_info[key] = value
+    # print("空",empty_items)
+    # print("非空",not_empty_items)
+    logger().info("原始车辆信息参数"+str(veh_info))
+    vin = veh_info.get('vin')
+    cduid = veh_info.get('cduid')
+    iccid = veh_info.get('iccid')
+    vehicleTypeCode = veh_info.get('vehicleTypeCode')
 
-
-
+    ret1 = tbox_regis.tbox_regis(iccid)
+    if ret1.get('code') == 200:
+        ret2 = cdu_regis.cdu_regis(cduid)
+        ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode)
+    else:
+        logger().warning("ICCID登记失败，ICCID已存在")
+        return {"code": 400, "message": "ICCID登记失败", "data": {"result": "ICCID登记失败，ICCID已存在，请联系管理员处理"}}
 
 
 
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='EA')
+    vehicle_regis(vehicleTypeCode='DF',vin='',cduid='',iccid='  89t17255397800266943')
