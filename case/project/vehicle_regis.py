@@ -58,6 +58,7 @@ def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
     if ret1.get('code') == 200:
         ret2 = cdu_regis.cdu_regis(cduid)
         ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode)
+        return ret2,ret3
     else:
         logger().warning("ICCID登记失败，ICCID已存在")
         return {"code": 400, "message": "ICCID登记失败", "data": {"result": "ICCID登记失败，ICCID已存在，请联系管理员处理"}}
@@ -67,4 +68,4 @@ def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='DF',vin='',cduid='',iccid='  89t17255397800266943')
+    vehicle_regis(vehicleTypeCode='EF',vin='',cduid='XPENGE380700354739011124',iccid='')
