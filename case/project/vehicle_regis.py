@@ -14,7 +14,7 @@ def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
-	@apiParam {String} vehicleTypeCode=EA 车型编码EA,EF。。
+	@apiParam {String} [vehicleTypeCode=EA] 车型编码EA,EF。。
 	@apiParamExample {json} 请求示例:
 	{
 	     "vin": "L1NSPGE3812345678",
