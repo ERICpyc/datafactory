@@ -4,7 +4,7 @@ from case.secens import tbox_regis, cdu_regis, vehicle_bind
 from base.utiles import ran_vin, ran_cduid, ran_iccid
 from base.utiles import logger
 
-def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
+def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
     """
 	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
 	@apiGroup 项目
