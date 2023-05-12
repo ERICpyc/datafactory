@@ -64,9 +64,10 @@ def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
             return ret2, ret3
         elif ret1.find("400") != -1:
             logger().warning("ICCID登记失败，ICCID已存在")
-
+            return ret1
         else:
             logger().error("ICCID登记异常")
+            return ret1
             # return {"code": 500, "message": "ICCID登记失败", "data": {"result": "ICCID登记异常，请联系管理员处理"}}
 
 
