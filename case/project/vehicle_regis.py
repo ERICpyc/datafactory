@@ -57,12 +57,12 @@ def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
         logger().warning("车型未填写")
         return {"code": 400, "message": "请填写车型", "data": {"result": "数据表单检查异常，请填写车型"}}
     else:
-        ret1 = tbox_regis.tbox_regis(iccid)
-        if ret1.get('code') == 200:
+        ret1 = ''.join(tbox_regis.tbox_regis(iccid))
+        if ret1.find("200") != -1:
             ret2 = cdu_regis.cdu_regis(cduid)
             ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode)
             return ret2, ret3
-        elif ret1.get('code') == 400:
+        elif ret1.find("400") != -1:
             logger().warning("ICCID登记失败，ICCID已存在")
             return {"code": 400, "message": "ICCID登记失败", "data": {"result": "ICCID登记失败，ICCID已存在，请联系管理员处理"}}
         else:
@@ -74,4 +74,4 @@ def vehicle_regis(vehicleTypeCode: str, vin= "", cduid= "", iccid=""):
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='EF',vin='',cduid='',iccid='')
+    vehicle_regis(vehicleTypeCode='EF',vin='',cduid='',iccid='89t27468537914235690')
