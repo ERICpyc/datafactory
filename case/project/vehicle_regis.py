@@ -64,14 +64,14 @@ def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
             return ret2, ret3
         elif ret1.get('code') == 400:
             logger().warning("ICCID登记失败，ICCID已存在")
-            return {"code": 400, "message": "ICCID登记失败", "data": {"result": "ICCID登记失败，ICCID已存在，请联系管理员处理"}}
+            return {"code": 400, "message": "ICCID登记失败", "data":"ICCID登记失败，ICCID已存在，请联系管理员处理"}
         else:
             logger().error("ICCID登记异常")
-            return {"code": 500, "message": "ICCID登记失败", "data": {"result": "ICCID登记异常，请联系管理员处理"}}
+            return {"code": 500, "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
 
 
 
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='',vin='',cduid='',iccid='89t27468537914235690')
+    vehicle_regis(vehicleTypeCode='EA',vin='',cduid='',iccid='')

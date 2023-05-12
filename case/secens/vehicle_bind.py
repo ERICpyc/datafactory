@@ -31,7 +31,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             responseCode = res_json.get("code")
             assert responseCode == 200
             logger().info(f"---注册车辆成功，输出断言结果：{vin}！！！")
-            return {"code": 200, "message": "VIN登记成功", "data": {"result": "VIN登记成功","vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
+            return {"code": 200, "message": "VIN登记成功", "data": "vin="+vin+"\ncduid="+cduid+"\niccid="+iccid+"\n车型="+vehicleTypeCode}
         except:
             responseCode = res_json.get("code")
             assert responseCode == 400
@@ -40,7 +40,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             re_up = requests.post(url=url_vin_update, json=body, headers=header)
             re_up_json = re_up.json()
             # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
-            
+
             code = re_up_json.get("code")
             # code=200注册成功，code=400，走修改绑定，再次注册
             if code == 200:

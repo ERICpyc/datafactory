@@ -24,14 +24,14 @@ def cdu_regis(cduid):
             responseCode = res_json.get("code")
             assert responseCode == 200
             logger().info(f"---注册大屏成功，输出断言结果：{cduid}！！！")
-            return {"code": 200, "message": "CDUID登记成功", "data": {"result": "CDUID登记成功"}}
+            return {"code": 200, "message": "CDUID登记成功", "data": "CDUID登记成功"}
         except:
             responseCode = res_json.get("code")
             assert responseCode == 400
             logger().info("大屏注册失败，断言失败情况，大屏已存在：{}")
             logger().info("大屏信息存在，走修改大屏接口！！！")
-            return {"code": 400, "message": "登记失败，cduid已存在", "data": {"result": "登记失败，cduid已存在"}}
+            return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败，cduid已存在"}
     except Exception as e:
         logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(cduid))
-        return {"code": 500, "message": "登记失败，大屏信息异常", "data": {"result": "登记失败，大屏信息异常"}}
+        return {"code": 500, "message": "登记失败，大屏信息异常", "data": "登记失败，大屏信息异常"}
