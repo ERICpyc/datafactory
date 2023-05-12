@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from case.secens import tbox_regis, cdu_regis, vehicle_bind
-from base.utiles import ran_vin, ran_cduid, ran_iccid
+from base.utiles import random_veh
 from base.utiles import logger
 
 def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
@@ -42,7 +42,7 @@ def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
     veh_info["vehicleTypeCode"] = vehicleTypeCode.strip()
     # empty_items = []
     # not_empty_items = []
-    ran_value = [ran_vin,ran_cduid,ran_iccid]
+    ran_value = random_veh()
     for key,value in zip(['vin','cduid','iccid'],ran_value):
         if not veh_info[key] or len(veh_info[key]) == 0:
             veh_info[key] = value

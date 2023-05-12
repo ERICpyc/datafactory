@@ -51,12 +51,9 @@ def random_veh():
     ran_vin = 'TEST'+''.join(random.sample(up_words,13))
     ran_cduid = 'TESTCDU'+''.join(random.sample(up_words,16))
     ran_iccid = '89t' +''.join(random.sample(low_words,17))
-    return ran_iccid,ran_vin,ran_cduid
+    return [ran_vin,ran_cduid,ran_iccid]
 
-out = random_veh()
-ran_iccid = out[0]
-ran_vin = out[1]
-ran_cduid = out[2]
+
 # print(ran_vin)
 # print(ran_cduid)
 # print(ran_iccid)
