@@ -55,7 +55,7 @@ def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
     vehicleTypeCode = veh_info.get('vehicleTypeCode')
     if not vehicleTypeCode:
         logger().warning("车型未填写")
-        return "请检查车型是否填写/填写正确！！"
+        return {"code": 400, "message": "车型未填写,登记失败", "data": "请检查车型是否填写正确！！"}
     else:
         ret1 = tbox_regis.tbox_regis(iccid)
         if ret1.get('code') == 200:
@@ -74,4 +74,4 @@ def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='EF',vin='',cduid='',iccid='89t27468537914235690')
+    vehicle_regis(vehicleTypeCode='',vin='',cduid='',iccid='89t27468537914235690')
