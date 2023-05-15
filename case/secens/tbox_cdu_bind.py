@@ -13,6 +13,7 @@ def tbox_cdu_bind(cduid,iccid):
     }
     # logging.info("大屏请求体：{}".format(body))
     url_cdu = "https://vmp.deploy-test.xiaopeng.com/api/cdu/add"
+    url_sou = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/info/cduid"
     try:
         # 请求注册大屏接口,并拿取响应结果
         res = requests.post(url=url_cdu, json=body, headers=header)
@@ -30,8 +31,15 @@ def tbox_cdu_bind(cduid,iccid):
             responsemsg = res_json.get("msg")
             assert responseCode == 400
             logger().info(f"大屏注册失败，断言失败情况，大屏已存在：{responsemsg}")
+            param = {
+                "cduId": "{}".format(cduid)
+            }
+            res_sou = requests.get(url=url_sou, params=param)
+            res_sou_json = res_sou.json()
+            val = res_sou_json.get("data")
+            vin1 = val.get("vin")
             logger().info("大屏信息存在，走修改大屏接口！！！")
-            return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + responsemsg}
+            return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + responsemsg+"占用车辆："+vin1}
     except Exception as e:
         logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(cduid))
