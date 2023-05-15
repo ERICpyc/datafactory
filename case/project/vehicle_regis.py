@@ -40,14 +40,10 @@ def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
     veh_info["cduid"] = cduid.strip()
     veh_info["iccid"] = iccid.strip()
     veh_info["vehicleTypeCode"] = vehicleTypeCode.strip()
-    # empty_items = []
-    # not_empty_items = []
     ran_value = random_veh()
     for key,value in zip(['vin','cduid','iccid'],ran_value):
         if not veh_info[key] or len(veh_info[key]) == 0:
             veh_info[key] = value
-    # print("空",empty_items)
-    # print("非空",not_empty_items)
     logger().info("原始车辆信息参数"+str(veh_info))
     vin = veh_info.get('vin')
     cduid = veh_info.get('cduid')
