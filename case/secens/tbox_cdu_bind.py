@@ -39,7 +39,7 @@ def tbox_cdu_bind(cduid,iccid):
             val = res_sou_json.get("data")
             vin1 = val.get("vin")
             logger().info("大屏信息存在，走修改大屏接口！！！")
-            return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + responsemsg+"占用车辆："+vin1}
+            return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + responsemsg+" 占用车辆："+vin1}
     except Exception as e:
         logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(cduid))
