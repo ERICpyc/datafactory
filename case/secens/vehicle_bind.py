@@ -70,7 +70,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                 val = res_sou_json.get("data")
                 vin1 = val.get("vin")
                 logger().info("输出占用注册大屏信息的vin：{}".format(vin1))
-                # 修改更新车辆大屏信息
+                # 屏换vin，需要给原先的vin1生成一个随机大屏，解放出来目标屏
                 body2 = {
                     "vin": "{}".format(vin1),
                     "cduId": "{}".format(cduid1),
@@ -81,24 +81,24 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     requests.post(url=url_vin_update, json=body2, headers=header).json()))
 
                 # 注册绑定对应的大屏
-                rs = requests.post(url=url_vin, json=body, headers=header)
-                rs_json = rs.json()
+                responseCode = requests.post(url=url_vin, json=body, headers=header)
+                res_json = responseCode.json()
 
                 # 若是存在vin和cduid都存在的情况,注册会再次报400
                 try:
                     responseCode = res_json.get("code")
                     assert responseCode == 200
                     logger().info(f"---修改信息成功后，重新执行注册车辆成功：{vin}！！！")
-                    return {"code": 200, "message": "VIN登记成功,换绑cduid注册成功", "data": "vin="+vin+"\ncduid="+cduid+"\niccid="+iccid+"\n车型="+vehicleTypeCode}
+                    return {"code": 200, "message": "VIN登记成功,换绑cduid注册成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
                 except:
                     responseCode = res_json.get("code")
-                    assert responseCode == 200
+                    assert responseCode == 400
                     # 在走修改接口
                     re_up = requests.post(url=url_vin_update, json=body, headers=header)
                     re_up_json1 = re_up.json()
                     logger().info(
                         f"---重走修改接口，修改注册车辆信息成功：{vin}！！！")
-                    return {"code": 200, "message": "VIN登记成功,换绑vin注册成功", "data": "vin="+vin+"\ncduid="+cduid+"\niccid="+iccid+"\n车型="+vehicleTypeCode}
+                    return {"code": 200, "message": "VIN登记成功,换绑vin注册成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
                     # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
 
     except Exception as e:
