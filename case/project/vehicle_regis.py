@@ -6,15 +6,15 @@ from base.utiles import logger
 
 def vehicle_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
     """
-	@api {post} /vehicle_regis 车辆登记（适用于E38,E28A,F30及后续车型）
+	@api {post} /vehicle_regis E38，E28A，F30等后续新车型车辆登记
 	@apiGroup 项目
 	@apiName vehicle_regis
-	@apiDescription  适用于E38,E28A,F30及后续车型，若需要随机生成车辆参数，只填写车型即可
+	@apiDescription  适用于E38,E28A,F30及后续车型，车型必填，其余参数若无业务要求，留空即可。
 	@apiPermission long
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
-	@apiParam {String} [vehicleTypeCode=EA] 车型编码EA,EF。。
+	@apiParam {String} [vehicleTypeCode=EA] 车型编码EA,EF...
 	@apiParamExample {json} 请求示例:
 	{
 	     "vin": "L1NSPGE3812345678",

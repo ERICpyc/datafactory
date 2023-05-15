@@ -4,15 +4,15 @@ from base.utiles import logger
 
 def old_model_veh_regis(vehicleTypeCode= "", vin= "", cduid= "", iccid=""):
     """
-	@api {post} /old_model_veh_regis 车辆登记（适用于E28,D55,D21,D20车型）
+	@api {post} /old_model_veh_regis D2X,E28,D55旧车型车辆登记
 	@apiGroup 项目
 	@apiName old_model_veh_regis
-	@apiDescription  适用于E28,D55,D21,D20车型，**若需要随机生成车辆参数，只填写车型即可**
+	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可。
 	@apiPermission long
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
 	@apiParam {String} iccid=89861121290032272XXX 20位TBOX编号
-	@apiParam {String} vehicleTypeCode=ED 车型编码ED,DF
+	@apiParam {String} vehicleTypeCode=ED 车型编码ED,DF...
 	@apiParamExample {json} 请求示例:
 	{
 	     "vin": "L1NSPGE3812345678",
