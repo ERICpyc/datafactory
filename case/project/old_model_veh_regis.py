@@ -5,7 +5,7 @@ from base.utiles import logger
 
 def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     """
-	@api {post} /old_model_veh_regis 【国内预发】车管D2X,E28,D55旧车型车辆登记
+	@api {post} /old_model_veh_regis 【国内预发】车管123D2X,E28,D55旧车型车辆登记
 	@apiName old_model_veh_regis
 	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可。
 	@apiPermission 彭煜尘
