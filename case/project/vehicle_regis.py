@@ -14,7 +14,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
-	@apiParam {String} [车型编码=EA] EA、EF，FA,HA以及后续车管登记的新车型
+	@apiParam {String} [vehicleTypeCode=EA] 车型编码，EA、EF，FA,HA以及后续车管登记的新车型
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}
     veh_info["vin"] = vin.strip()
