@@ -31,7 +31,9 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             responseCode = res_json.get("code")
             assert responseCode == 200
             logger().info(f"---注册车辆成功，输出断言结果：{vin,cduid,iccid}！！！")
-            return {"code": 200, "message": "VIN登记成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
+            # return {"code": 200, "message": "VIN登记成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
+            return {"code": 200, "message": "VIN登记成功",
+                    "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
         except:
             responseCode = res_json.get("code")
             assert responseCode == 400
