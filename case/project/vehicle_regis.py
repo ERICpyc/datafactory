@@ -20,8 +20,9 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     veh_info["vin"] = vin.strip()
     veh_info["cduid"] = cduid.strip()
     veh_info["iccid"] = iccid.strip()
-    veh_info["vehicleTypeCode"] = vehicleTypeCode.strip()
+    veh_info["vehicleTypeCode"] = vehicleTypeCode.strip().upper()
     ran_value = random_veh()
+    new_vtype = ['EA','EF','HA','FA']
     for key, value in zip(['vin', 'cduid', 'iccid'], ran_value):
         if not veh_info[key] or len(veh_info[key]) == 0:
             veh_info[key] = value
@@ -30,22 +31,27 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     cduid = veh_info.get('cduid')
     iccid = veh_info.get('iccid')
     vehicleTypeCode = veh_info.get('vehicleTypeCode')
+    print(vehicleTypeCode)
     if not vehicleTypeCode:
         logger().warning("车型未填写")
         return {"code": 400, "message": "车型未填写,登记失败", "data": "车型必填，请检查车型是否填写正确"}
     else:
-        ret1 = tbox_regis.tbox_regis(iccid)
-        if ret1.get('code') == 200:
-            ret2 = cdu_regis.cdu_regis(cduid)
-            ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode)
-            return ret3
-        elif ret1.get('code') == 400:
-            logger().warning("ICCID登记失败，ICCID已存在")
-            return {"code": 400, "message": "ICCID登记失败", "data": "ICCID登记失败，ICCID:" + iccid + "已存在，请联系管理员处理"}
+        if vehicleTypeCode in new_vtype:
+            ret1 = tbox_regis.tbox_regis(iccid)
+            if ret1.get('code') == 200:
+                ret2 = cdu_regis.cdu_regis(cduid)
+                ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode)
+                return ret3
+            elif ret1.get('code') == 400:
+                logger().warning("ICCID登记失败，ICCID已存在")
+                return {"code": 400, "message": "ICCID登记失败", "data": "ICCID登记失败，ICCID:" + iccid + "已存在，请联系管理员处理"}
+            else:
+                logger().error("ICCID登记异常")
+                return {"code": 500, "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
         else:
-            logger().error("ICCID登记异常")
-            return {"code": 500, "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
+            logger().warning("车型不匹配")
+            return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填EA、EF，FA,HA之一"}
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='EA', vin='', cduid='TESTCDUD5HVISC4Q962BKMX', iccid='89t11467838040063258')
+    vehicle_regis(vehicleTypeCode='eA', vin='', cduid='', iccid='')
