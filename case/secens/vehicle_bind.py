@@ -47,7 +47,8 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             # code=200注册成功，code=400，走修改绑定，再次注册
             if code == 200:
                 logger().info(f"---断言修改车辆信息结果，预期修改成功，输出结果：{vin,cduid,iccid}")
-                return {"code": 200, "message": "VIN换绑登记成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
+                return {"code": 200, "message": "VIN换绑登记成功",
+                        "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
             else:
                 # 可能是大屏已存在绑定车辆的情况，给一个大屏随机绑定占用信息的vin，在注册信息
                 logger().info("!!!导致注册车辆失败的原因，是大屏已存在！！！")
@@ -91,7 +92,8 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     responseCode = res_json.get("code")
                     assert responseCode == 200
                     logger().info(f"---修改信息成功后，重新执行注册车辆成功：{vin}！！！")
-                    return {"code": 200, "message": "VIN登记成功,换绑cduid注册成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
+                    return {"code": 200, "message": "VIN登记成功,换绑cduid注册成功",
+                            "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
                 except:
                     responseCode = res_json.get("code")
                     assert responseCode == 400
@@ -100,10 +102,12 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     re_up_json1 = re_up.json()
                     logger().info(
                         f"---重走修改接口，修改注册车辆信息成功：{vin}！！！")
-                    return {"code": 200, "message": "VIN登记成功,换绑vin注册成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
+                    return {"code": 200, "message": "VIN登记成功,换绑vin注册成功",
+                            "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
                     # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
 
     except Exception as e:
         logger().error("---！！注册修改车辆都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改车辆都失败，输出异常vin：{}！！---".format(vin))
-        return {"code": 500, "message": "VIN登记异常", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
+        return {"code": 500, "message": "VIN登记异常",
+                "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
