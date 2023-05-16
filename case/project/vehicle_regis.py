@@ -7,7 +7,7 @@ from base.utiles import logger
 
 def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     """
-	@api {post} /vehicle_regis E38，E28A，F30等后续新车型车辆登记
+	@api {post} /vehicle_regis 【国内预发】车管E38，E28A，F30等后续新车型车辆登记
 	@apiName vehicle_regis
 	@apiDescription  适用于E38,E28A,F30及后续车型，车型必填，其余参数若无业务要求，留空即可。
 	@apiPermission 彭煜尘
