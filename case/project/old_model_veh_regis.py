@@ -9,10 +9,10 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 	@apiName old_model_veh_regis
 	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可。
 	@apiPermission 彭煜尘
-	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
-	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
-	@apiParam {String} iccid=89861121290032272XXX 20位TBOX编号
-	@apiParam {String} [vehicleTypeCode]=ED 车型编码，填写ED ED,DF,DB,DC,DE,DG之一
+	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
+	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
+	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
+	@apiParam {String} vehicleTypeCode=ED 车型编码，填写ED ED,DF,DB,DC,DE,DG之一
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}
     veh_info["vin"] = vin.strip()
