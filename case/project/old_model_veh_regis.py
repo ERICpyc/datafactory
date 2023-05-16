@@ -12,13 +12,13 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} cduid=XPENGE380700354739011XXX 21-24位大屏硬件号
 	@apiParam {String} iccid=89861121290032272XXX 20位TBOX编号
-	@apiParam {String} [vehicleTypeCode]=车型编码，填写ED ED,DF,DB,DC,DE,DG之一
+	@apiParam {String} [vehicleTypeCode]=ED 车型编码，填写ED ED,DF,DB,DC,DE,DG之一
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}
     veh_info["vin"] = vin.strip()
     veh_info["cduid"] = cduid.strip()
     veh_info["iccid"] = iccid.strip()
-    veh_info["vehicleTypeCode"] = vehicleTypeCode.strip()
+    veh_info["vehicleTypeCode"] = vehicleTypeCode.strip().upper()
     ran_value = random_veh()
     old_vtype = ['DA', 'DB', 'DE', 'DC', 'DG', 'DF', 'ED']
     for key, value in zip(['vin', 'cduid', 'iccid'], ran_value):
