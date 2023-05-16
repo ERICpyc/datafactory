@@ -2,7 +2,7 @@
 
 from case.secens import tbox_regis, cdu_regis, vehicle_bind
 from base.utiles import random_veh
-from base.utiles import logger
+from base.config import logger
 
 
 def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):

@@ -1,6 +1,6 @@
 from case.secens import tbox_cdu_bind, vehicle_bind
 from base.utiles import random_veh
-from base.utiles import logger
+from base.config import logger
 
 
 def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):

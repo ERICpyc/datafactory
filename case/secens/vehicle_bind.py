@@ -1,5 +1,6 @@
 import requests
-from base.utiles import logger, vmp_cookie, ob_value_choice
+from base.config import logger, vmp_cookie
+from base.utiles import ob_value_choice
 
 
 def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):

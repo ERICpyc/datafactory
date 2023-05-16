@@ -1,6 +1,6 @@
 import requests
 
-from base.utiles import logger, vmp_cookie
+from base.config import logger, vmp_cookie
 
 def tbox_regis(iccid):
     header = {
