@@ -7,7 +7,7 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     """
 	@api {post} /old_model_veh_regis 【国内预发】车管D2X,E28,D55旧车型车辆登记
 	@apiName old_model_veh_regis
-	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可。
+	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。
 	@apiPermission 彭煜尘
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
@@ -32,6 +32,9 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     if not vehicleTypeCode:
         logger().warning("车型未填写")
         return {"code": 400, "message": "车型未填写,登记失败", "data": "车型必填，请检查车型是否填写正确！！"}
+    elif len(vin) != 17 or len(cduid) < 21 or len(cduid) > 24 or len(iccid) != 20:
+        logger().warning("入参长度异常")
+        return {"code": 400, "message": "入参长度异常,登记失败", "data": "入参长度异常，请检查参数长度是否正常"}
     else:
         if vehicleTypeCode in old_vtype:
             ret1 = tbox_cdu_bind.tbox_cdu_bind(cduid, iccid)
