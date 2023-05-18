@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-from case.secens import tbox_regis, cdu_regis, vehicle_bind
+from case.scenes import tbox_regis, cdu_regis, vehicle_bind
 from base.utiles import random_veh
 from base.config import logger
 

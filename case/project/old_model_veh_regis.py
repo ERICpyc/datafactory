@@ -1,4 +1,4 @@
-from case.secens import tbox_cdu_bind, vehicle_bind
+from case.scenes import tbox_cdu_bind, vehicle_bind
 from base.utiles import random_veh
 from base.config import logger
 
@@ -7,7 +7,7 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     """
 	@api {post} /old_model_veh_regis 【国内预发】车管D2X,E28,D55旧车型车辆登记
 	@apiName old_model_veh_regis
-	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。
+	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。 常用车型编码映射：E38-EA E28-ED E28A-EF F30-FA D55-DF
 	@apiPermission 彭煜尘
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
