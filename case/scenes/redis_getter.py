@@ -7,9 +7,13 @@ def redis_getter(vin):
     "hostname": "r-bp1b6174kvzb35hu37.redis.rds.aliyuncs.com",
     "password": "X5E6clSwuwxmoNLA",
     "dbIndex": 5,
-    "key": "vmp:signal_realtime:L1NSPGHB9MA076880"
+    "key": "vmp:signal_realtime:" + vin
 }
     body_r = str(body).replace("'", "\"")
     re = requests.post(url=r_url,data=body_r,headers=header_js)
-    logger().info(re)
-    return {"code": 200, "message": "更新成功", "data": vin+"redis字段更新成功"}
+    logger().info(re.json())
+    val_re = re.json()
+    return val_re
+
+if __name__ == "__main__":
+    redis_getter(vin='L1NNSGHB0NA008933')
