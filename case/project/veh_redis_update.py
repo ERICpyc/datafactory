@@ -6,9 +6,9 @@ from base.config import logger
 
 def veh_redis_update(vin="", soc="50", odometer="10000"):
     """
-	@api {post} /veh_redis_update 【国内预发】更新车辆redis数据
+	@api {post} /veh_redis_update 【国内预发】更新车辆大数据实时状态
 	@apiName veh_redis_update
-	@apiDescription  更新预发布车辆redis数据，当前支持当前电量和总里程字段。soc:当前电量（为空默认50），odometer：总里程（为空默认10000）。注意vin必填且其他参数必须填写一条。
+	@apiDescription  更新国内预发车辆大数据实时状态，当前支持当前电量和总里程字段。soc:当前电量（为空默认50），odometer：总里程（为空默认10000）。注意vin必填且其他参数必须填写一条。
 	@apiPermission 彭煜尘
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} [soc=50] 当前电量（为空默认50%）
