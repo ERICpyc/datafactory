@@ -1,9 +1,8 @@
 from base.utiles import getv_info
-from base.config import logger, header_js
+from base.config import logger,header_js
 import requests
 
-
-def vin_checker(vin):
+def redis_update(vin, soc, odometer):
     vinfo = getv_info(vin)
     logger().info(vinfo)
     if vinfo == -1:
@@ -11,38 +10,12 @@ def vin_checker(vin):
         return {"code": 400, "message": "车辆不存在", "data": "车辆不存在,请确定车架号是否正确或在预发布环境登记车辆！"}
     else:
         logger().info("车辆存在,返回vin")
-        vin = vinfo['vin']
-        return vin
-
-
-# re = vin_checker('L1NNSGHB0NA008933')
-# print(re)
-
-def redis_getter(vin):
-    r_url = "https://smp.deploy-test.xiaopeng.com/test/redis/hash/get"
-    body = {
-        "hostname": "r-bp1b6174kvzb35hu37.redis.rds.aliyuncs.com",
-        "password": "X5E6clSwuwxmoNLA",
-        "dbIndex": 5,
-        "key": "vmp:signal_realtime:L1NSPGHB9MA076880"
-    }
-    body_r = str(body).replace("'", "\"")
-    re = requests.post(url=r_url, data=body_r, headers=header_js)
-    logger().info(re)
-
-
-def redis_update(vin, soc='50', odometer='10000'):
-    re = vin_checker(vin)
-    if re == -1:
-        return re
-    else:
         w_url = "https://smp.deploy-test.xiaopeng.com/test/redis/hash/add"
-        r_url = "https://smp.deploy-test.xiaopeng.com/test/redis/hash/get"
         body = {
             "hostname": "r-bp1b6174kvzb35hu37.redis.rds.aliyuncs.com",
             "password": "X5E6clSwuwxmoNLA",
             "dbIndex": 5,
-            "key": "vmp:signal_realtime:" + vin,
+            "key": "vmp:signal_realtime:"+vin,
             "value": {
                 "ICM_TotalOdometer": odometer,
                 "timer": "1659669679771",
@@ -71,9 +44,15 @@ def redis_update(vin, soc='50', odometer='10000'):
             }
         }
         body_w = str(body).replace("'", "\"")
-        re = requests.post(url=w_url, data=body_w, headers=header_js)
-        logger().info(re)
+        re = requests.post(url=w_url, data=body_w,headers=header_js)
+        res_json = re.json()
+        logger().info("输出更新redis接口响应数据：{}".format(res_json))
+        try:
+            responseCode = res_json.get("code")
+            assert responseCode == 200
+            logger().info(f"---更新redis成功，输出断言结果：{vin,soc,odometer}！！！")
+            return {"code": 200, "message": "redis更新成功", "data": "redis更新成功"}
+        except Exception as e:
+            logger().error("---！！更新redis异常：{}！！---".format(e))
+            return {"code": 500, "message": "更新redis异常", "data": "更新异常，请联系管理员处理"}
 
-
-if __name__ == "__main__":
-    redis_update(vin='L1NNSGHB0NA008933', soc='11')
