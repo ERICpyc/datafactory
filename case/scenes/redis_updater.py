@@ -56,7 +56,7 @@ def redis_update(vin, soc, odometer):
             logger().info(f"---查询redis成功，输出断言结果：{val_re}！！！")
             d_soc = val_re['data']['value'].get('BMS_BattSOC')
             d_odom = val_re['data']['value'].get('ICM_TotalOdometer')
-            return {"code": 200, "message": "redis更新成功", "data": "redis更新成功\n当前电量"+d_soc+"当前总里程"+d_odom}
+            return {"code": 200, "message": "redis更新成功", "data": val_re}
         except Exception as e:
             logger().error("---！！更新redis异常：{}！！---".format(e))
             return {"code": 500, "message": "更新redis异常", "data": "更新异常，请联系管理员处理"}
