@@ -10,7 +10,7 @@ def veh_redis_update(vin="", soc="50", odometer="10000",powermode='0'):
 	@apiName veh_redis_update
 	@apiDescription  更新国内预发车辆大数据实时状态。参数解释参照说明，注意vin必填且其他参数必须填写一条，为空字段默认值处理。如有造数后验证无效或者增加信号字段需求请联系负责人。
 	@apiPermission 彭煜尘
-	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
+	@apiParam {String} vin=L1NNSGHB5NA000XXX 必填17位车架号
 	@apiParam {String} [soc=50] 当前电量（为空默认50%）
 	@apiParam {String} [odometer=10000] 总里程（为空10000公里）
 	@apiParam {String} [powermode=0] 车辆上下电状态（0：下电，1：上电，为空默认0）

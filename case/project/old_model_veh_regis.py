@@ -9,7 +9,7 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 	@apiName old_model_veh_regis
 	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。
 	@apiPermission 彭煜尘
-	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
+	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 必填17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
 	@apiParam {String} vehicleTypeCode=ED 车型编码， ED(E28),DF(D55),DB(D20),DC(D21),DE(D20P),DG(D22)之一

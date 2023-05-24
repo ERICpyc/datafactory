@@ -11,7 +11,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 	@apiName vehicle_regis
 	@apiDescription  适用于E38,E28A,F30及后续车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。
 	@apiPermission 彭煜尘
-	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
+	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 必填17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
 	@apiParam {String} vehicleTypeCode=EA 车型编码，EA(E38)、EF(E28A)，FA(F30),HA(H93)以及后续车管登记的新车型
