@@ -4,7 +4,7 @@ from case.scenes import redis_updater, redis_getter
 from base.config import logger
 
 
-def veh_redis_update(vin="", soc="50", odometer="10000"):
+def veh_redis_update(vin="", soc="50", odometer="10000",powermode='0'):
     """
 	@api {post} /veh_redis_update 【国内预发】更新车辆大数据实时状态
 	@apiName veh_redis_update
@@ -13,6 +13,7 @@ def veh_redis_update(vin="", soc="50", odometer="10000"):
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} [soc=50] 当前电量（为空默认50%）
 	@apiParam {String} [odometer=10000] 总里程（为空10000公里）
+	@apiParam {String} [powermode=0] 车辆上下电状态（0：下电，1：上电，为空默认0）
 	"""
     if not vin:
         logger().warning("vin未填写")
@@ -24,7 +25,7 @@ def veh_redis_update(vin="", soc="50", odometer="10000"):
         logger().warning("入参异常")
         return {"code": 400, "message": "参数均为空,更新失败", "data": "参数均为空，请至少保证一个参数存在"}
     else:
-        ret1 = redis_updater.redis_update(vin, soc, odometer)
+        ret1 = redis_updater.redis_update(vin, soc, odometer,powermode)
         return ret1
 
 
