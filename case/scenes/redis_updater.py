@@ -27,7 +27,8 @@ def redis_update(vin, soc, odometer, powermode):
                 "vin": vin,
                 "HVAC_CDU_CorrectedExterTempSt": "1",
                 "HVAC_CorrectedCabinTemp": "28",
-                "carIgonState": powermode
+                "LDCU_EVSysReadySt": powermode,
+                "VCU_EVSysReadySt":powermode
             }
         }
         body_w = str(body).replace("'", "\"")
