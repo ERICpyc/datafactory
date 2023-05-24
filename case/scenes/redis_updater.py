@@ -20,15 +20,17 @@ def redis_update(vin, soc, odometer, powermode):
             "key": "vmp:signal_realtime:" + vin,
             "value": {
                 "ICM_TotalOdometer": odometer,
+                "CDCU_TotalOdometer": odometer,
                 "timer": "1659669679771",
                 "gps_lon": "120.57571",
                 "gps_lat": "28.068434",
                 "BMS_BattSOC": soc,
+                "BMS_BattSOC_Disp": soc,
                 "vin": vin,
                 "HVAC_CDU_CorrectedExterTempSt": "1",
                 "HVAC_CorrectedCabinTemp": "28",
                 "LDCU_EVSysReadySt": powermode,
-                "VCU_EVSysReadySt":powermode
+                "VCU_EVSysReadySt": powermode
             }
         }
         body_w = str(body).replace("'", "\"")

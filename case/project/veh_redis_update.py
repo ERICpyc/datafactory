@@ -8,7 +8,7 @@ def veh_redis_update(vin="", soc="50", odometer="10000",powermode='0'):
     """
 	@api {post} /veh_redis_update 【国内预发】更新车辆大数据实时状态
 	@apiName veh_redis_update
-	@apiDescription  更新国内预发车辆大数据实时状态。参数解释参照说明，注意vin必填且其他参数必须填写一条，为空字段默认值处理
+	@apiDescription  更新国内预发车辆大数据实时状态。参数解释参照说明，注意vin必填且其他参数必须填写一条，为空字段默认值处理。如有造数后验证无效或者增加信号字段需求请联系负责人。
 	@apiPermission 彭煜尘
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} [soc=50] 当前电量（为空默认50%）
@@ -21,9 +21,9 @@ def veh_redis_update(vin="", soc="50", odometer="10000",powermode='0'):
     elif len(vin) != 17:
         logger().warning("车架号长度异常")
         return {"code": 400, "message": "车架号长度异常,更新失败", "data": "车架号长度异常，请检查是否为17位"}
-    elif not soc and not odometer and not powermode:
-        logger().warning("入参异常")
-        return {"code": 400, "message": "参数均为空,更新失败", "data": "参数均为空，请至少保证一个参数存在"}
+    # elif not soc and not odometer and not powermode:
+    #     logger().warning("入参异常")
+    #     return {"code": 400, "message": "参数均为空,更新失败", "data": "参数均为空，请至少保证一个参数存在"}
     else:
         ret1 = redis_updater.redis_update(vin, soc, odometer,powermode)
         return ret1
