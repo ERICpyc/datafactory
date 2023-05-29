@@ -8,7 +8,7 @@ def veh_redis_update(vin="", soc="50", odometer="10000",powermode='0'):
     """
 	@api {post} /veh_redis_update 【国内预发】更新车辆大数据实时状态
 	@apiName veh_redis_update
-	@apiDescription  更新国内预发车辆大数据实时状态。参数解释参照说明，注意vin必填且其他参数必须填写一条，为空字段默认值处理。如有造数后验证无效或者增加信号字段需求请联系负责人。
+	@apiDescription  更新国内预发车辆大数据实时状态。参数解释参照说明，注意vin必填且必须车管预发有登记（返回VIN不存在，请先用车型登记模块登记），为空字段默认值处理。如有造数后验证无效或者增加信号字段需求请联系负责人。
 	@apiPermission 彭煜尘
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 必填17位车架号
 	@apiParam {String} [soc=50] 当前电量（为空默认50%）

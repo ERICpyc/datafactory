@@ -43,4 +43,6 @@ def getv_info(vin):
         logger().info("车辆不存在，返回int = -1")
         return -1
 
-
+def concat_dict_to_string(data):
+    """将字典中的键值对拼接成字符串，以分号分隔键值对，等号分隔键和值"""
+    return ';'.join([f"{k}={v}" for k, v in data.items()])
