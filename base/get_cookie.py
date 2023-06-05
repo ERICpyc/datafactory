@@ -31,8 +31,9 @@ def get_cookie():
     cookie_dict = {}
     for c in driver.get_cookies():
         cookie_dict[c['name']] = c['value']
-    str_cookie = ';'.join([f"{k}={v}" for k, v in cookie_dict.items()])
+    str_cookie = ';'.join([k + '=' + v for k, v in cookie_dict.items()])
     return str_cookie
 
 test_cookie = get_cookie()
+print(test_cookie)
 
