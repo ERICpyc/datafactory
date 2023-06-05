@@ -2,11 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import time
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from base.utiles import concat_dict_to_string
 
 def get_cookie():
     options = webdriver.ChromeOptions()
@@ -34,8 +31,7 @@ def get_cookie():
     cookie_dict = {}
     for c in driver.get_cookies():
         cookie_dict[c['name']] = c['value']
-
-    str_cookie = concat_dict_to_string(cookie_dict)
+    str_cookie = ';'.join([f"{k}={v}" for k, v in cookie_dict.items()])
     return str_cookie
 
 test_cookie = get_cookie()
