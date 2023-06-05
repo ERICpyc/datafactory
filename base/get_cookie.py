@@ -1,4 +1,6 @@
-# 导入selenium库中的webdriver模块
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
