@@ -56,4 +56,4 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='eA', vin='', cduid='XPENGH930000000000000011', iccid='')
+    vehicle_regis(vehicleTypeCode='HA', vin='OTA89484561206523', cduid='XPENGH930700354B50001018', iccid='')

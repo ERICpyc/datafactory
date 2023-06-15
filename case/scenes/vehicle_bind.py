@@ -17,6 +17,8 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
         "vin": "{}".format(vin),
         "cduId": "{}".format(cduid),
         "iccid": "{}".format(iccid),
+        "actColor":"霜月白",
+        "actColorCode":"1B",
         "vehicleTypeCode": "{}".format(vehicleTypeCode)
     }
     # logging.info("车辆请求提示：{}".format(body))
@@ -79,6 +81,8 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     "vin": "{}".format(vin1),
                     "cduId": "{}".format(cduid1),
                     "iccid": "{}".format(iccid1),
+                    "actColor": "青宇蓝",
+                    "actColorCode": "WL",
                     "vehicleTypeCode": "{}".format(vehicleTypeCode)
                 }
                 logger().info("旧vin信息修改绑定新的大屏信息，响应返回：{}".format(
