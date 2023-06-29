@@ -1,6 +1,8 @@
 import requests
 
 from base.config import logger, vmp_cookie
+from case.scenes import pil_bind
+
 
 def tbox_cdu_bind(cduid,iccid):
     header = {
@@ -25,6 +27,7 @@ def tbox_cdu_bind(cduid,iccid):
             responseCode = res_json.get("code")
             assert responseCode == 200
             logger().info(f"---注册大屏成功，输出断言结果：{cduid,iccid}！！！")
+            pil_bind.pil_bind(iccid)
             return {"code": 200, "message": "CDUID,登记成功", "data": "CDUID,ICCID绑定登记成功"}
         except:
             responseCode = res_json.get("code")

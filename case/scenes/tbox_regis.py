@@ -1,5 +1,5 @@
 import requests
-
+from case.scenes import pil_bind
 from base.config import logger, vmp_cookie
 
 def tbox_regis(iccid):
@@ -31,6 +31,7 @@ def tbox_regis(iccid):
             responseCode = res_json.get("code")
             assert responseCode == 200
             logger().info(f"---注册TBOX成功，输出断言结果：{iccid}！！！")
+            pil_bind.pil_bind(iccid)
             return {"code": 200, "message": "ICCID登记成功", "data": "ICCID登记成功"}
         except:
             responseCode = res_json.get("code")
