@@ -11,7 +11,7 @@ def get_cookie():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    driver_path =  r'/usr/local/bin/chromedriver'
+    driver_path = '/usr/local/bin/chromedriver'
     driver = webdriver.Chrome(driver_path, options=options)
 
     # 打开网页
@@ -29,12 +29,13 @@ def get_cookie():
         "123456")
     driver.find_element(By.CSS_SELECTOR,
                         "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY > button").click()
-    time.sleep(60)
+    time.sleep(12)
     cookie_dict = {}
     for c in driver.get_cookies():
         cookie_dict[c['name']] = c['value']
     str_cookie = ';'.join([k + '=' + v for k, v in cookie_dict.items()])
     return str_cookie
+
 
 test_cookie = get_cookie()
 print(test_cookie)
