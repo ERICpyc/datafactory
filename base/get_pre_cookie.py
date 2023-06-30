@@ -5,7 +5,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-def get_cookie():
+def get_pre_cookie():
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
