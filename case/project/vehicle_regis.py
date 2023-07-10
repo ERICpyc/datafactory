@@ -9,7 +9,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
     """
 	@api {post} /vehicle_regis 【国内预发】车管新车型车辆登记
 	@apiName vehicle_regis
-	@apiDescription  适用于E38,E28A,F30及后续车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。
+	@apiDescription  适用于E38,E28A,F30及后续车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成。脚本执行大概需要30s左右，请耐心等待。
 	@apiPermission 彭煜尘
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 必填17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
@@ -56,4 +56,4 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid=""):
 
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='HA', vin='OTA89484561206523', cduid='XPENGH930700354B50001018', iccid='')
+    vehicle_regis(vehicleTypeCode='HA', vin='', cduid='', iccid='')

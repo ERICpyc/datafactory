@@ -1,11 +1,12 @@
 import requests
 
 from base.config import logger, vmp_cookie
+from base.get_pre_cookie import get_pre_cookie
 
 def cdu_regis(cduid):
     header = {
         "Content-Type": "application/json",
-        "Cookie": "{}".format(vmp_cookie)
+        "Cookie": "{}".format(get_pre_cookie())
     }
     body = {
         "cduId": "{}".format(cduid)

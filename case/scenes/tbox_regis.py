@@ -1,11 +1,12 @@
 import requests
 from case.scenes import pil_bind
 from base.config import logger, vmp_cookie
+from base.get_pre_cookie import get_pre_cookie
 
 def tbox_regis(iccid):
     header = {
         "Content-Type": "application/json",
-        "Cookie": "{}".format(vmp_cookie)
+        "Cookie": "{}".format(get_pre_cookie())
     }
 
     url_iccid = "https://vmp.deploy-test.xiaopeng.com/api/tbox/add"

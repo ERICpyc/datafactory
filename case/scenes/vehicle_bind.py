@@ -1,7 +1,7 @@
 import requests
 from base.config import logger, vmp_cookie
 from base.utiles import ob_value_choice
-
+from base.get_pre_cookie import get_pre_cookie
 
 def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
     url_vin = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/add"
@@ -11,7 +11,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
 
     header = {
         "Content-Type": "application/json",
-        "Cookie": "{}".format(vmp_cookie)
+        "Cookie": "{}".format(get_pre_cookie())
     }
     body = {
         "vin": "{}".format(vin),
