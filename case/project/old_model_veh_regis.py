@@ -5,7 +5,7 @@ from base.config import logger
 
 def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions=""):
     """
-	@api {post} /old_model_veh_regis 【国内预发】车管D2X,E28,D55旧车型车辆登记
+	@api {post} /old_model_veh_regis 【国内】车管D2X,E28,D55旧车型车辆登记
 	@apiName old_model_veh_regis
 	@apiDescription  适用于E28,D55,D21,D20车型，车型必填，其余参数若无业务要求，留空即可，脚本可随机生成，环境参数留空默认预发布环境
 	@apiPermission 彭煜尘
@@ -30,14 +30,15 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptio
     cduid = veh_info.get('cduid')
     iccid = veh_info.get('iccid')
     vehicleTypeCode = veh_info.get('vehicleTypeCode')
-    if envoptions.strip() == '1' or envoptions.strip() == '2' or envoptions.strip() == "":
-        if not vehicleTypeCode:
-            logger().warning("车型未填写")
-            return {"code": 400, "message": "车型未填写,登记失败", "data": "车型必填，请检查车型是否填写正确！！"}
-        elif len(vin) != 17 or len(cduid) < 21 or len(cduid) > 24 or len(iccid) != 20:
-            logger().warning("入参长度异常")
-            return {"code": 400, "message": "入参长度异常,登记失败", "data": "入参长度异常，请检查参数长度是否正常"}
-        else:
+
+    if not vehicleTypeCode:
+        logger().warning("车型未填写")
+        return {"code": 400, "message": "车型未填写,登记失败", "data": "车型必填，请检查车型是否填写正确！！"}
+    elif len(vin) != 17 or len(cduid) < 21 or len(cduid) > 24 or len(iccid) != 20:
+        logger().warning("入参长度异常")
+        return {"code": 400, "message": "入参长度异常,登记失败", "data": "入参长度异常，请检查参数长度是否正常"}
+    else:
+        if envoptions.strip() == '1' or envoptions.strip() == '2' or envoptions.strip() == "":
             if vehicleTypeCode in old_vtype:
                 ret1 = tbox_cdu_bind.tbox_cdu_bind(cduid, iccid,envoptions)
                 if ret1.get('code') == 200:
@@ -54,7 +55,9 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptio
             else:
                 logger().warning("车型不匹配")
                 return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填DA、DB，DE,DC,DG,DF,ED之一"}
-
+        else:
+            logger().warning("环境入参异常")
+            return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1或2，或留空"}
 
 if __name__ == "__main__":
     old_model_veh_regis(vehicleTypeCode='ED', vin='TESTXYUT7ISFD64ZA', cduid='', iccid='', envoptions = "2  ")
