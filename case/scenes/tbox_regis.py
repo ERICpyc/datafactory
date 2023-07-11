@@ -1,28 +1,37 @@
 import requests
 from case.scenes import pil_bind
-from base.config import logger, vmp_pcookie
+from base.config import logger, vmp_pcookie, vmp_tcookie
 
-def tbox_regis(iccid):
-    header = {
-        "Content-Type": "application/json",
-        "Cookie": "{}".format(vmp_pcookie)
-    }
+def tbox_regis(iccid,envoptions):
+    if envoptions.strip() == '2':
+        header = {
+            "Content-Type": "application/json",
+            "Cookie": "{}".format(vmp_tcookie)
+        }
+    else:
+        header = {
+            "Content-Type": "application/json",
+            "Cookie": "{}".format(vmp_pcookie)
+        }
 
     url_iccid = "https://vmp.deploy-test.xiaopeng.com/api/tbox/add"
-    url_cdu = "https://vmp.deploy-test.xiaopeng.com/api/cdu/add"
-    url_cdu_update = "https://vmp.deploy-test.xiaopeng.com/api/cdu/update"
-    url_vin = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/add"
-    url_vin_update = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/update"
-    url_sou = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/info/cduid"
-    cdu_sou = "https://vmp.deploy-test.xiaopeng.com/api/cdu/info"
-
+    # url_cdu = "https://vmp.deploy-test.xiaopeng.com/api/cdu/add"
+    # url_cdu_update = "https://vmp.deploy-test.xiaopeng.com/api/cdu/update"
+    # url_vin = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/add"
+    # url_vin_update = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/update"
+    # url_sou = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/info/cduid"
+    # cdu_sou = "https://vmp.deploy-test.xiaopeng.com/api/cdu/info"
+    url_test_iccid = "http://vmp.test.xiaopeng.local/api/tbox/add"
     body = {
         "iccid": "{}".format(iccid),
         "partsNo": 121212
     }
     try:
-        # 请求注册TBIX接口,并拿取响应结果
-        res = requests.post(url=url_iccid, json=body, headers=header)
+        # 请求注册TBoX接口,并拿取响应结果
+        if envoptions.strip() == '2':
+            res = requests.post(url=url_test_iccid, json=body, headers=header)
+        else:
+            res = requests.post(url=url_iccid, json=body, headers=header)
         # 转换为json格式
         res_json = res.json()
         logger().info("输出注册TBOX接口响应数据：{}".format(res_json))

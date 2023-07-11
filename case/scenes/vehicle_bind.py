@@ -1,17 +1,27 @@
 import requests
-from base.config import logger, vmp_pcookie
+from base.config import logger, vmp_pcookie,vmp_tcookie
 from base.utiles import ob_value_choice
 
-def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
+def vehicle_bind(iccid, cduid, vin, vehicleTypeCode,envoptions):
     url_vin = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/add"
     url_vin_update = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/update"
     url_sou = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/info/cduid"
     url_cdu = "https://vmp.deploy-test.xiaopeng.com/api/cdu/add"
 
-    header = {
-        "Content-Type": "application/json",
-        "Cookie": "{}".format(vmp_pcookie)
-    }
+    url_test_vin = "http://vmp.test.xiaopeng.local/api/vehicle/add"
+    url_test_upvin = "http://vmp.test.xiaopeng.local/api/vehicle/update"
+    url_test_sou = "http://vmp.test.xiaopeng.local/api/vehicle/info/cduid"
+    url_test_cdu = "http://vmp.test.xiaopeng.local/api/cdu/add"
+    if envoptions.strip() == '2':
+        header = {
+            "Content-Type": "application/json",
+            "Cookie": "{}".format(vmp_tcookie)
+        }
+    else:
+        header = {
+            "Content-Type": "application/json",
+            "Cookie": "{}".format(vmp_pcookie)
+        }
     body = {
         "vin": "{}".format(vin),
         "cduId": "{}".format(cduid),
@@ -23,7 +33,10 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
     # logging.info("车辆请求提示：{}".format(body))
     try:
         # 请求注册车辆接口,并拿取响应结果
-        res = requests.post(url=url_vin, json=body, headers=header)
+        if envoptions.strip() == '2':
+            res = requests.post(url=url_test_vin, json=body, headers=header)
+        else:
+            res = requests.post(url=url_vin, json=body, headers=header)
         # 转换为json格式
         res_json = res.json()
         logger().info("输出注册车辆接口响应数据：{}".format(res_json))
@@ -34,14 +47,23 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
             assert responseCode == 200
             logger().info(f"---注册车辆成功，输出断言结果：{vin,cduid,iccid}！！！")
             # return {"code": 200, "message": "VIN登记成功", "data": "vin="+vin+" cduid="+cduid+" iccid="+iccid+" 车型="+vehicleTypeCode}
-            return {"code": 200, "message": "VIN登记成功",
-                    "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
+            if envoptions.strip() == '2':
+                return {"code": 200, "message": "测试环境VIN登记成功",
+                        "data": {"vin": vin, "cduid": cduid, "iccid": iccid, "车型": vehicleTypeCode}}
+            else:
+                return {"code": 200, "message": "预发布环境VIN登记成功",
+                        "data": {"vin": vin, "cduid": cduid, "iccid": iccid, "车型": vehicleTypeCode}}
+            # return {"code": 200, "message": "VIN登记成功",
+            #         "data": {"vin":vin,"cduid":cduid,"iccid":iccid,"车型":vehicleTypeCode}}
         except:
             responseCode = res_json.get("code")
             assert responseCode == 400
             logger().info(f"车辆注册失败，断言失败情况，车架号已存在：{vin}")
             logger().info("车辆信息存在，走修改车辆接口！！！")
-            re_up = requests.post(url=url_vin_update, json=body, headers=header)
+            if envoptions.strip() == '2':
+                re_up = requests.post(url=url_test_upvin, json=body, headers=header)
+            else:
+                re_up = requests.post(url=url_vin_update, json=body, headers=header)
             re_up_json = re_up.json()
             # 若是iccid也存在，可能也会导致注册流程失败，此流程待定
 
@@ -61,10 +83,14 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     "cduId": "{}".format(cduid1),
                     "iccid": "{}".format(iccid1)
                 }
+                if envoptions.strip() == '2':
+                    re_cdu = requests.post(url=url_test_cdu, json=body1, headers=header)
+                else:
+                    re_cdu = requests.post(url=url_cdu, json=body1, headers=header)
+
                 logger().info("替换的新大屏的信息：{}".format(body1))
                 # 注册一个随机大屏,输出响应数据
-                logger().info("新大屏注册，响应数据返回：{}".format(
-                    requests.post(url=url_cdu, json=body1, headers=header).json()))
+                logger().info("新大屏注册，响应数据返回：{}".format(re_cdu.json()))
 
                 # 走cduid查询，拿到对应vin信息
                 param = {
@@ -84,11 +110,18 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     "actColorCode": "WL",
                     "vehicleTypeCode": "{}".format(vehicleTypeCode)
                 }
-                logger().info("旧vin信息修改绑定新的大屏信息，响应返回：{}".format(
-                    requests.post(url=url_vin_cupdate, json=body2, headers=header).json()))
+                if envoptions.strip() == '2':
+                    re_vin = requests.post(url=url_test_upvin, json=body2, headers=header)
+                else:
+                    re_vin = requests.post(url=url_vin_update, json=body2, headers=header)
+                logger().info("旧vin信息修改绑定新的大屏信息，响应返回：{}".format(re_vin.json()))
 
                 # 注册绑定对应的大屏
-                responseCode = requests.post(url=url_vin, json=body, headers=header)
+                if envoptions.strip() == '2':
+                    responseCode = requests.post(url=url_test_vin, json=body, headers=header)
+                else:
+                    responseCode = requests.post(url=url_vin, json=body, headers=header)
+
                 res_json = responseCode.json()
 
                 # 若是存在vin和cduid都存在的情况,注册会再次报400
@@ -102,7 +135,11 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     responseCode = res_json.get("code")
                     assert responseCode == 400
                     # 在走修改接口
-                    re_up = requests.post(url=url_vin_update, json=body, headers=header)
+                    if envoptions.strip() == '2':
+                        re_up = requests.post(url=url_test_upvin, json=body, headers=header)
+                    else:
+                        re_up = requests.post(url=url_vin_update, json=body, headers=header)
+
                     re_up_json1 = re_up.json()
                     logger().info(
                         f"---重走修改接口，修改注册车辆信息成功：{vin}！！！")

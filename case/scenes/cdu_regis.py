@@ -1,20 +1,31 @@
 import requests
 
-from base.config import logger, vmp_pcookie
+from base.config import logger, vmp_pcookie,vmp_tcookie
 
-def cdu_regis(cduid):
-    header = {
-        "Content-Type": "application/json",
-        "Cookie": "{}".format(vmp_pcookie)
-    }
+def cdu_regis(cduid,envoptions):
+    if envoptions.strip() == '2':
+        header = {
+            "Content-Type": "application/json",
+            "Cookie": "{}".format(vmp_tcookie)
+        }
+    else:
+        header = {
+            "Content-Type": "application/json",
+            "Cookie": "{}".format(vmp_pcookie)
+        }
+
     body = {
         "cduId": "{}".format(cduid)
     }
     # logging.info("大屏请求体：{}".format(body))
     url_cdu = "https://vmp.deploy-test.xiaopeng.com/api/cdu/add"
+    url_test_cdu = "http://vmp.test.xiaopeng.local/api/cdu/add"
     try:
         # 请求注册大屏接口,并拿取响应结果
-        res = requests.post(url=url_cdu, json=body, headers=header)
+        if envoptions.strip() == '2':
+            res = requests.post(url=url_test_cdu, json=body, headers=header)
+        else:
+            res = requests.post(url=url_cdu, json=body, headers=header)
         # 转换为json格式
         res_json = res.json()
         logger().info("输出注册大屏接口响应数据：{}".format(res_json))
