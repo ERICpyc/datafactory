@@ -1,14 +1,13 @@
 import requests
 
-from base.config import logger, vmp_cookie
+from base.config import logger, vmp_pcookie
 from case.scenes import pil_bind
-from base.get_pre_cookie import get_pre_cookie
 
 
 def tbox_cdu_bind(cduid,iccid):
     header = {
         "Content-Type": "application/json",
-        "Cookie": "{}".format(get_pre_cookie())
+        "Cookie": "{}".format(vmp_pcookie)
     }
     body = {
         "cduId": "{}".format(cduid),

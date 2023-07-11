@@ -1,7 +1,6 @@
 import requests
-from base.config import logger, vmp_cookie
+from base.config import logger, vmp_pcookie
 from base.utiles import ob_value_choice
-from base.get_pre_cookie import get_pre_cookie
 
 def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
     url_vin = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/add"
@@ -11,7 +10,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
 
     header = {
         "Content-Type": "application/json",
-        "Cookie": "{}".format(get_pre_cookie())
+        "Cookie": "{}".format(vmp_pcookie)
     }
     body = {
         "vin": "{}".format(vin),
@@ -86,7 +85,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode):
                     "vehicleTypeCode": "{}".format(vehicleTypeCode)
                 }
                 logger().info("旧vin信息修改绑定新的大屏信息，响应返回：{}".format(
-                    requests.post(url=url_vin_update, json=body2, headers=header).json()))
+                    requests.post(url=url_vin_cupdate, json=body2, headers=header).json()))
 
                 # 注册绑定对应的大屏
                 responseCode = requests.post(url=url_vin, json=body, headers=header)
