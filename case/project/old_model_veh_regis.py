@@ -11,7 +11,7 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptio
 	@apiPermission 彭煜尘
 	@apiParam {String} [envoptions=1] 环境选择，1-国内预发布，2-国内测试，不填默认预发布
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 必填17位车架号
-	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-24位大屏硬件号
+	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-25位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
 	@apiParam {String} vehicleTypeCode=ED 车型编码， ED(E28),DF(D55),DB(D20),DC(D21),DE(D20P),DG(D22)之一
 	"""
@@ -34,7 +34,7 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptio
     if not vehicleTypeCode:
         logger().warning("车型未填写")
         return {"code": 400, "message": "车型未填写,登记失败", "data": "车型必填，请检查车型是否填写正确！！"}
-    elif len(vin) != 17 or len(cduid) < 21 or len(cduid) > 24 or len(iccid) != 20:
+    elif len(vin) != 17 or len(cduid) < 21 or len(cduid) > 25 or len(iccid) != 20:
         logger().warning("入参长度异常")
         return {"code": 400, "message": "入参长度异常,登记失败", "data": "入参长度异常，请检查参数长度是否正常"}
     else:
