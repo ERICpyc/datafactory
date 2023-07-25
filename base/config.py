@@ -2,9 +2,9 @@
 
 import logging,sys
 sys.path.append('/root/liwl5/FunDataFactory/data-factory-vehicle/base')
+import os
 
 
-from cookie_store import t_cookie,p_cookie
 
 
 def logger():
@@ -20,6 +20,11 @@ def logger():
         logger.addHandler(chlr)
     return logger
 
+
+
+
+t_cookie = os.environ.get('T_COOKIE')
+p_cookie = os.environ.get('P_COOKIE')
 
 if t_cookie:
     # 使用 t_cookie 的值执行所需的操作
