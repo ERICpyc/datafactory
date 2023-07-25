@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging,sys
-from base.cookie_store import p_cookie, t_cookie
+from base import cookie_store
 
 sys.path.append('/root/liwl5/FunDataFactory/data-factory-vehicle/base')
 def logger():
@@ -17,18 +17,20 @@ def logger():
         logger.addHandler(chlr)
     return logger
 
-if t_cookie:
+
+if cookie_store.t_cookie:
     # 使用 t_cookie 的值执行所需的操作
-    print("T_COOKIE:", t_cookie)
-    vmp_tcookie = t_cookie
+    print("T_COOKIE:", cookie_store.t_cookie)
+    vmp_tcookie = cookie_store.t_cookie
 else:
     print("未找到 T_COOKIE 参数")
 
-if p_cookie:
+if cookie_store.p_cookie:
     # 使用 p_cookie 的值执行所需的操作
-    print("P_COOKIE:", p_cookie)
-    vmp_pcookie = p_cookie
+    print("P_COOKIE:", cookie_store.p_cookie)
+    vmp_pcookie = cookie_store.p_cookie
 else:
     print("未找到 P_COOKIE 参数")
+
 
 header_js = {"Content-Type": "application/json"}
