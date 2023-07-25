@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import logging,sys
 from base.cookie_store import p_cookie, t_cookie
 
+sys.path.append('/root/liwl5/FunDataFactory/data-factory-vehicle/base')
 def logger():
     logger = logging.getLogger()
     if len(logger.handlers) == 0:  # 只添加一个输出到控制台的handler
