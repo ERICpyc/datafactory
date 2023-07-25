@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+
 import logging
 from base.cookie_store import p_cookie, t_cookie
-# -*- coding: utf-8 -*-
+
 
 def logger():
     logger = logging.getLogger()
