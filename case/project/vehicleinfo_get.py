@@ -3,8 +3,8 @@ from case.scenes import get_vehinfo
 
 def vehicleinfo_get( vin="", envoptions=""):
     """
-	@api {post} /vehicle_regis 【国内】车管车辆信息查询
-	@apiName vehicle_regis
+	@api {get} /vehicleinfo_get 【国内】车管车辆信息查询
+	@apiName vehicleinfo_get
 	@apiDescription  适用于查询车管车辆基础信息（车型，用途，cduid,iccid等），环境参数留空默认预发布环境。
 	@apiPermission 彭煜尘
 	@apiParam {String} [envoptions=1] 环境选择，1-国内预发布，2-国内测试，不填默认预发布
