@@ -22,9 +22,13 @@ def vehicleinfo_get( vin="", envoptions=""):
             if envoptions.strip() == '1' or envoptions.strip() == "":
                 get_vehinfo.get_p_vinfo(vin)
                 logger().info("预发布查询成功")
+                ret = get_vehinfo.get_p_vinfo(vin)
+                return ret
             elif envoptions.strip() == '2':
                 get_vehinfo.get_t_vinfo(vin)
                 logger().info("测试环境查询成功")
+                ret = get_vehinfo.get_t_vinfo(vin)
+                return ret
             else:
                 logger().warning("环境参数异常")
                 return {"code": 400, "message": "环境参数异常", "data": "环境参数异常，请检查环境参数是否正确"}
