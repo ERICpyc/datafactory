@@ -5,7 +5,7 @@ import requests
 
 
 def redis_update(vin, soc, odometer, powermode):
-    vinfo = getv_info(vin)
+    vinfo = getv_info(vin=vin,envoptions='1')
     logger().info(vinfo)
     if vinfo == -1:
         logger().info("车辆不存在")

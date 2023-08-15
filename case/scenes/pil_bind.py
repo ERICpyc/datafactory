@@ -1,8 +1,6 @@
 import json
 
-from base.utiles import getv_info
 from base.config import logger, header_js
-from case.scenes import redis_getter
 import requests
 
 

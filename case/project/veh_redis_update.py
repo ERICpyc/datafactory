@@ -30,4 +30,4 @@ def veh_redis_update(vin="", soc="50", odometer="10000",powermode='0'):
 
 
 if __name__ == "__main__":
-    veh_redis_update(vin='L1NNSGHB0NA008933')
+    veh_redis_update(vin='L1NSPGHBXP7TEST01')

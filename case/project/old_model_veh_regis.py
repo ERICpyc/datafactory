@@ -1,5 +1,5 @@
 from case.scenes import tbox_cdu_bind, vehicle_bind
-from base.utiles import random_veh
+from base.utiles import random_veh,getv_info
 from base.config import logger
 
 
