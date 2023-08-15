@@ -8,7 +8,7 @@ def vehicleinfo_get( vin="", envoptions=""):
 	@apiDescription  适用于查询车管车辆基础信息（车型，用途，cduid,iccid等），环境参数留空默认预发布环境。
 	@apiPermission 彭煜尘
 	@apiParam {String} [envoptions=1] 环境选择，1-国内预发布，2-国内测试，不填默认预发布
-	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 必填17位车架号
+	@apiParam {String} vin=L1NNSGHB5NA000XXX 必填17位车架号
 	"""
 
     try:
