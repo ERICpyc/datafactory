@@ -2,7 +2,6 @@
 
 import logging,sys
 from base.cookie_store import t_cookie,p_cookie
-sys.path.append('/root/liwl5/FunDataFactory/data-factory-vehicle/base')
 import os
 
 
