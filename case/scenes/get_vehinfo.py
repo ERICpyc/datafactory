@@ -59,7 +59,7 @@ def get_siminfo(iccid):
             "apn1": res_json["data"]["apn1"],
             "apn2": res_json["data"]["apn2"]
         }
-        return {"code": 200, "message": "查询成功，返回信息如下", "data": {"apn1已使用": sim_info["apn1UseCount"], "apn1剩余": sim_info["apn1Remaining"], "apn2已使用": sim_info["apn2UseCount"], "apn2剩余": sim_info["apn2Remaining"], "apn1": sim_info["apn1"], "apn2": sim_info["apn2"]}}
+        return {"code": 200, "message": "查询成功，返回信息如下", "data": {"apn1UseCount": sim_info["apn1UseCount"], "apn1Remaining": sim_info["apn1Remaining"], "apn2UseCount": sim_info["apn2UseCount"], "apn2Remaining": sim_info["apn2Remaining"], "apn1Status": sim_info["apn1"], "apn2Status": sim_info["apn2"]}}
 
     elif res_json["code"] == 400:
         return {"code": 400, "message": "查询失败，返回信息如下", "data": res_json}
