@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging,sys
-from base.cookie_store import t_cookie,p_cookie
+from base.cookie_store import t_cookie,p_cookie,s_cookie
 import os
 
 
@@ -41,6 +41,13 @@ if p_cookie:
     vmp_pcookie = p_cookie
 else:
     print("未找到 P_COOKIE 参数")
+
+if s_cookie:
+    # 使用 s_cookie 的值执行所需的操作
+    print("S_COOKIE:", s_cookie)
+    vmp_scookie = s_cookie
+else:
+    print("未找到 S_COOKIE 参数")
 
 
 header_js = {"Content-Type": "application/json"}
