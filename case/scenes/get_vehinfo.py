@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import json
 from base.config import logger, header_js,vmp_scookie
 import requests
@@ -51,12 +52,12 @@ def get_siminfo(iccid):
     logger().info("输出注册TBOX接口响应数据：{}".format(res_json))
     if res_json["code"] == 200:
         sim_info = {
-            "apn1已使用": res_json["data"]["apn1UseCount"],
-            "apn1剩余": res_json["data"]["apn1Remaining"],
-            "apn2已使用": res_json["data"]["apn2UseCount"],
-            "apn2剩余": res_json["data"]["apn2Remaining"],
-            "apn1状态": res_json["data"]["apn1"],
-            "apn2状态": res_json["data"]["apn2"]
+            "apn1UseCount": res_json["data"]["apn1UseCount"],
+            "apn1Remaining": res_json["data"]["apn1Remaining"],
+            "apn2UseCount": res_json["data"]["apn2UseCount"],
+            "apn2Remaining": res_json["data"]["apn2Remaining"],
+            "apn1": res_json["data"]["apn1"],
+            "apn2": res_json["data"]["apn2"]
         }
         return {"code": 200, "message": "查询成功，返回信息如下", "data": json.dumps(sim_info)}
 
