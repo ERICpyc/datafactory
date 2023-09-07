@@ -37,6 +37,7 @@ def get_pre_cookie():
     for c in driver.get_cookies():
         cookie_dict[c['name']] = c['value']
     str_cookie = ';'.join([k + '=' + v for k, v in cookie_dict.items()])
+    driver.quit()
     return str_cookie
 
 
