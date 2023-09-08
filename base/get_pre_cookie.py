@@ -44,6 +44,7 @@ def get_pre_cookie():
 
     # 将cookie转换为字符串，从字段里面拿键值，等号分割,每个键值对之间; 分割
     str_cookie = ';'.join([k + '=' + v for k, v in cookie_dict.items()])
+    driver.quit()
     return str_cookie
 
 
