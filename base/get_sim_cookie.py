@@ -20,6 +20,8 @@ def get_cookie():
     # 点击翼虎登录
     driver.find_element(By.CSS_SELECTOR,
                         "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button > span").click()
+
+    print(driver.page_source)
     driver.implicitly_wait(10)
     # 点击其他登陆方式
     driver.find_element(By.CSS_SELECTOR,

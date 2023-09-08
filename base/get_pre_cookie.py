@@ -20,6 +20,7 @@ def get_pre_cookie():
     # 点击登录按钮
     driver.find_element(By.CSS_SELECTOR,
                         "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
+    print(driver.page_source)
     driver.implicitly_wait(10)
     driver.find_element(By.CSS_SELECTOR,
                         "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
@@ -39,7 +40,6 @@ def get_pre_cookie():
     str_cookie = ';'.join([k + '=' + v for k, v in cookie_dict.items()])
     driver.quit()
     return str_cookie
-
 
 test_cookie = get_pre_cookie()
 print(test_cookie)
