@@ -19,7 +19,7 @@ def get_cookie():
         driver.find_element(By.CSS_SELECTOR,
                             "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button > span").click()
 
-        print(driver.page_source)
+        # print(driver.page_source)
         driver.implicitly_wait(10)
         # 点击其他登陆方式
         driver.find_element(By.CSS_SELECTOR,
@@ -35,7 +35,14 @@ def get_cookie():
         # 点击确认登陆
         driver.find_element(By.CSS_SELECTOR,
                             "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY > button").click()
-        time.sleep(12)
+        driver.implicitly_wait(10)
+        entry_flag = driver.find_element(By.CSS_SELECTOR,
+                                         "#app > div > section > div.topbar > div.platform-info-container > p").text
+        print(entry_flag)
+        if entry_flag == "大运营平台":
+            print("大运营平台登陆成功")
+        else:
+            print("大运营平台登陆失败")
         cookie_dict = {}
 
         # 获取cookie，并且按照键值对的格式存储起来

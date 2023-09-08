@@ -17,7 +17,7 @@ def get_cookie():
     try:
         # 打开网页
         driver.get("http://e.test.xiaopeng.local/#/login?forward_url=")
-        print(driver.page_source)
+
         # 点击登录按钮
         driver.find_element(By.CSS_SELECTOR,
                             "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
@@ -30,7 +30,14 @@ def get_cookie():
             "123456")
         driver.find_element(By.CSS_SELECTOR,
                             "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY > button").click()
-        time.sleep(12)
+        driver.implicitly_wait(10)
+        entry_flag = driver.find_element(By.CSS_SELECTOR,
+                                         "#app > div > section > div.topbar > div.platform-info-container > p").text
+        print(entry_flag)
+        if entry_flag == "大运营平台":
+            print("大运营平台登陆成功")
+        else:
+            print("大运营平台登陆失败")
         cookie_dict = {}
         for c in driver.get_cookies():
             cookie_dict[c['name']] = c['value']
