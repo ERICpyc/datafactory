@@ -50,7 +50,6 @@ def get_cookie():
     except Exception as e:
         print(e)
         driver.quit()
-        return None
 
 
 

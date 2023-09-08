@@ -43,7 +43,6 @@ def get_pre_cookie():
     except Exception as e:
         print(e)
         driver.quit()
-        return None
 
 
 test_cookie = get_pre_cookie()
