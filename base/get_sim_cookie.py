@@ -4,7 +4,6 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
@@ -37,7 +36,7 @@ def get_cookie():
     driver.implicitly_wait(10)
     entry_flag = driver.find_element(By.CSS_SELECTOR,
                                      "#app > div > section > div.topbar > div.platform-info-container > p").text
-    print(entry_flag)
+    # print(entry_flag)
     if entry_flag == "大运营平台":
         print("大运营平台登陆成功")
     else:

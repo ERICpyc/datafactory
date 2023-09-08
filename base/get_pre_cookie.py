@@ -35,7 +35,7 @@ def get_pre_cookie():
     driver.implicitly_wait(10)
     entry_flag = driver.find_element(By.CSS_SELECTOR,
                                      "#app > div > section > div.topbar > div.platform-info-container > p").text
-    print(entry_flag)
+    # print(entry_flag)
     if entry_flag == "大运营平台":
         print("大运营平台登陆成功")
     else:
