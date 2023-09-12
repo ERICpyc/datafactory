@@ -60,4 +60,4 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
             return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1或2，或留空"}
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='HA', vin='', cduid='', iccid='',envoptions='')
+    vehicle_regis(vehicleTypeCode='EA', vin='', cduid='', iccid='123455301118D1100874',envoptions='2')
