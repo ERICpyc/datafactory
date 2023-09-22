@@ -21,6 +21,7 @@ def get_cookie():
 
     # print(driver.page_source)
     driver.implicitly_wait(10)
+    driver.save_screenshot('/root/liwl5/FunDataFactory/errorScreen/ss.png')
     # 点击其他登陆方式
     driver.find_element(By.CSS_SELECTOR,
                         "#__next > div > div.login_login_container__m0zeS > "
