@@ -3,9 +3,9 @@
 import requests
 import json
 
-from feisuhR.get_token import get_token
+from feisuhR import get_token
 
-auth = get_token()
+auth = get_token.get_token()
 # 读取表格第一行数据
 url = "https://open.feishu.cn/open-apis/sheets/v2/spreadsheets/ESeVsI8T1hBxqytkssWczNl5nDc/values/a81839!A1:C1"
 
