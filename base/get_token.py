@@ -1,6 +1,6 @@
 import requests
 
-def get_token():
+def get_feishu_token():
     url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
 
     headers = {
