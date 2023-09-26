@@ -2,9 +2,22 @@
 
 import requests
 
-from base.get_token import get_feishu_token
+# 获取飞书token
+url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/"
 
-auth = get_feishu_token()
+headers1 = {
+        "Content-Type": "application/json; charset=utf-8"
+    }
+
+data1 = {
+        "app_id": "cli_a1fa75a4dabcd00b",
+        "app_secret": "0p27zWpHCetvHgEeg5LYpedUjZkokUQy"
+    }
+
+response = requests.post(url, headers=headers1, json=data1)
+json_data = response.json()
+auth = json_data.get("tenant_access_token")
+
 # 读取表格第一行数据
 url = "https://open.feishu.cn/open-apis/sheets/v2/spreadsheets/ESeVsI8T1hBxqytkssWczNl5nDc/values/a81839!A1:C1"
 
