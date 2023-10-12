@@ -27,6 +27,7 @@ headers = {
     }
 
 res = requests.get(url, headers=headers)
+print(type(res))
 json_data = res.json()
 msg = json_data['data']['valueRange']['values']
 if res.status_code == 200:
@@ -48,7 +49,7 @@ sim_url = "http://10.192.31.93:8080/api/cases/rpc/siminfo_get"
 headers0 = {
         "Content-Type": "application/json"
 }
-data = {"iccid":"89860323332000011401"}
+data = {"iccid":"89861121290032273526"}
 res0 = requests.post(sim_url, headers=headers0, json=data)
 print(res0.json())
 # 发送飞书消息

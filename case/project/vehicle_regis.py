@@ -15,7 +15,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-25位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
-	@apiParam {String} vehicleTypeCode=EA 车型编码(填写EA这种)，EA(E38)、EF(E28A)，FA(F30),HA(H93)以及后续车管登记的新车型
+	@apiParam {String} vehicleTypeCode=EA 车型编码(填写EA这种)，EA(E38)、EF(E28A)，FA(F30),HA(H93)，FC(F57)，DM(D01)以及后续车管登记的新车型
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}
     veh_info["vin"] = vin.strip()
@@ -23,7 +23,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
     veh_info["iccid"] = iccid.strip()
     veh_info["vehicleTypeCode"] = vehicleTypeCode.strip().upper()
     ran_value = random_veh()
-    new_vtype = ['EA', 'EF', 'HA', 'FA']
+    new_vtype = ['EA', 'EF', 'HA', 'FA', 'DM', 'FC']
     for key, value in zip(['vin', 'cduid', 'iccid'], ran_value):
         if not veh_info[key] or len(veh_info[key]) == 0:
             veh_info[key] = value
@@ -54,7 +54,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
                     return {"code": 500, "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
             else:
                 logger().warning("车型不匹配")
-                return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填EA、EF，FA,HA之一"}
+                return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填EA、EF，FA,HA,FC,DM之一"}
         else:
             logger().warning("环境入参异常")
             return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1或2，或留空"}
