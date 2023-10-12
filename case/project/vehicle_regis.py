@@ -35,7 +35,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
     if not vehicleTypeCode:
         logger().warning("车型未填写")
         return {"code": 400, "message": "车型未填写,登记失败", "data": "车型必填，请检查车型是否填写正确"}
-    elif len(vin) != 17 or len(cduid) < 21 or len(cduid) > 25 or len(iccid) != 20:
+    elif len(vin) != 17 or len(cduid) < 17 or len(cduid) > 25 or len(iccid) != 20:
         logger().warning("入参长度异常")
         return {"code": 400, "message": "入参长度异常,登记失败", "data": "入参长度异常，请检查参数长度是否正常"}
     else:
