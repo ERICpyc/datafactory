@@ -32,7 +32,7 @@ def tbox_regis(iccid,envoptions):
             res = requests.post(url=url_test_iccid, json=body, headers=header)
         else:
             res = requests.post(url=url_iccid, json=body, headers=header)
-        # 转换为json格式
+        # 转换为json格式p
         res_json = res.json()
         logger().info("输出注册TBOX接口响应数据：{}".format(res_json))
         # 断言走分支

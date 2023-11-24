@@ -11,6 +11,7 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver_path = '/usr/local/bin/chromedriver'
+# driver_path = r'E:/tool_scripts/chorme_ver/chromedriver-win64/chromedriver.exe'
 driver = webdriver.Chrome(driver_path, options=options)
 def get_cookie():
     # 打开网页

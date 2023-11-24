@@ -12,6 +12,7 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver_path = '/usr/local/bin/chromedriver'
+# driver_path = r'E:/tool_scripts/chorme_ver/chromedriver-win64/chromedriver.exe'
 driver = webdriver.Chrome(driver_path, options=options)
 
 
@@ -19,12 +20,13 @@ def get_pre_cookie():
     # 打开网页
     driver.get("https://e.deploy-test.xiaopeng.com/#/login?forward_url=")
     # 点击登录按钮
+    driver.implicitly_wait(10)
     driver.find_element(By.CSS_SELECTOR,
                         "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
     # print(driver.page_source)
     driver.implicitly_wait(10)
-    driver.find_element(By.CSS_SELECTOR,
-                        "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
+    # driver.find_element(By.CSS_SELECTOR,
+    #                     "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
     driver.implicitly_wait(10)
     driver.find_element(By.CSS_SELECTOR,
                         "#__next > div > div.login_login_container__m0zeS > form > div:nth-child(1) > div > input").send_keys(
