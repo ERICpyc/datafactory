@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 options = webdriver.ChromeOptions()
-options.add_argument('--headless')
+# options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver_path = '/usr/local/bin/chromedriver'
@@ -25,8 +25,10 @@ def get_pre_cookie():
                         "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
     # print(driver.page_source)
     driver.implicitly_wait(10)
-    # driver.find_element(By.CSS_SELECTOR,
-    #                     "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
+
+    # 预发布环境这个【其他登陆方式】时有时无的，再有问题要加下判断逻辑
+    driver.find_element(By.CSS_SELECTOR,
+                        "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
     driver.implicitly_wait(10)
     driver.find_element(By.CSS_SELECTOR,
                         "#__next > div > div.login_login_container__m0zeS > form > div:nth-child(1) > div > input").send_keys(

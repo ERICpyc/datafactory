@@ -7,10 +7,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 options = webdriver.ChromeOptions()
+# 无头网页驱动后台执行，本地调试需要注释掉
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 driver_path = '/usr/local/bin/chromedriver'
+# driver_path = r'E:/tool_scripts/chorme_ver/chromedriver-win64/chromedriver.exe'
 driver = webdriver.Chrome(driver_path, options=options)
 
 
