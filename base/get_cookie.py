@@ -1,6 +1,6 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -24,6 +24,17 @@ def get_cookie():
         # 点击登录按钮
         driver.find_element(By.CSS_SELECTOR,
                             "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
+        driver.implicitly_wait(10)
+        time.sleep(2)
+        # 判断元素列表是否为空
+        # if driver.find_element(By.CSS_SELECTOR,
+        #                        "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a"):
+        #     driver.find_element(By.CSS_SELECTOR,
+        #                         "#__next > div > div.login_login_container__m0zeS > "
+        #                         "div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
+        # else:
+        #     # 元素不存在，跳过这一条
+        #     pass
         driver.implicitly_wait(10)
         driver.find_element(By.CSS_SELECTOR,
                             "#__next > div > div.login_login_container__m0zeS > form > div:nth-child(1) > div > input").send_keys(

@@ -17,6 +17,7 @@ driver = webdriver.Chrome(driver_path, options=options)
 
 
 def get_pre_cookie():
+    exist_eles = driver.find_elements(By.CSS_SELECTOR, "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a")
     try:
         # 打开网页
         driver.get("https://e.deploy-test.xiaopeng.com/#/login?forward_url=")
@@ -26,9 +27,19 @@ def get_pre_cookie():
                             "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
         # print(driver.page_source)
         driver.implicitly_wait(10)
-
-        driver.find_element(By.CSS_SELECTOR,
-                            "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
+        time.sleep(2)
+        # 判断元素列表是否为空
+        if driver.find_element(By.CSS_SELECTOR,
+                               "#__next > div > div.login_login_container__m0zeS > "
+                               "div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a"):
+            driver.find_element(By.CSS_SELECTOR,
+                                "#__next > div > div.login_login_container__m0zeS > "
+                                "div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
+        else:
+            # 元素不存在，跳过这一条
+            pass
+        # driver.find_element(By.CSS_SELECTOR,
+        #                     "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
         driver.implicitly_wait(10)
         driver.find_element(By.CSS_SELECTOR,
                             "#__next > div > div.login_login_container__m0zeS > form > div:nth-child(1) > div > input").send_keys(
