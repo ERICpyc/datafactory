@@ -3,6 +3,7 @@
 import time
 
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -26,13 +27,11 @@ def get_cookie():
         driver.implicitly_wait(10)
         time.sleep(2)
         driver.save_screenshot('/root/liwl5/FunDataFactory/errorScreen/ss.png')
-        if driver.find_element(By.CSS_SELECTOR,
-                             "#__next > div > div.login_login_container__m0zeS > "
-                            "div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a"):
-            driver.find_element(By.CSS_SELECTOR,
-                                "#__next > div > div.login_login_container__m0zeS > "
-                                "div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a").click()
-        else:
+        try:
+            element = driver.find_element(By.CSS_SELECTOR,
+                                          "#__next > div > div.login_login_container__m0zeS > div.login_login_item__0Mprr.login_login_btn__nY2rY.login_login_btn_feishu__K3tFP > a")
+            element.click()
+        except NoSuchElementException:
             # 元素不存在，跳过这一条
             pass
 
