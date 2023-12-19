@@ -26,7 +26,6 @@ def get_cookie():
         driver.find_element(By.CSS_SELECTOR,
                             "#particles > div.login-wrapper > div > form > div:nth-child(1) > div > button").click()
         driver.implicitly_wait(10)
-        time.sleep(2)
         ## 判断元素列表是否为空
         try:
             element = driver.find_element(By.CSS_SELECTOR,
