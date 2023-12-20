@@ -51,7 +51,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
                     return {"code": 400, "message": "ICCID登记失败", "data": "ICCID登记失败，ICCID:" + iccid + "已存在，请联系管理员处理"}
                 else:
                     logger().error("ICCID登记异常")
-                    return {"code": 500, "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
+                    return {"code": ret1.get('code'), "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
             else:
                 logger().warning("车型不匹配")
                 return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填EA、EF，FA,HA,FC,DM之一"}
@@ -60,4 +60,4 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
             return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1或2，或留空"}
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='ED', vin='LMVHFE1Z0L1110026', cduid='', iccid='',envoptions='2')
+    vehicle_regis(vehicleTypeCode='ED', vin='', cduid='', iccid='',envoptions='2')
