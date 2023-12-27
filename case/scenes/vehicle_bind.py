@@ -62,7 +62,7 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
                     "vehicleMaterielId": "{}".format(materialNum)
                 }
             else:
-                logger().warn("当前车型不存在该物料编码：{}".format(res.json()))
+                logger().warn("当前车型不存在该物料编码：{}".format(res))
                 return {"code": 400, "message": "车辆信息注册失败，物料编码不匹配！",
                         "data": {"车型": vehicleTypeCode,"物料":materialNum}}
 
