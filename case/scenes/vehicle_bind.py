@@ -3,16 +3,20 @@ from base.config import logger, vmp_pcookie, vmp_tcookie
 from base.utiles import ob_value_choice
 
 
-def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions):
+def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
+    # 预发布接口
     url_vin = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/add"
     url_vin_update = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/update"
     url_sou = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/info/cduid"
     url_cdu = "https://vmp.deploy-test.xiaopeng.com/api/cdu/add"
-
+    url_material_list = "https://vmp.deploy-test.xiaopeng.com/api/vehicle/xbom/materialId/list"
+    # 测试接口
     url_test_vin = "http://vmp.test.xiaopeng.local/api/vehicle/add"
     url_test_upvin = "http://vmp.test.xiaopeng.local/api/vehicle/update"
     url_test_sou = "http://vmp.test.xiaopeng.local/api/vehicle/info/cduid"
     url_test_cdu = "http://vmp.test.xiaopeng.local/api/cdu/add"
+    url_test_material_list = "http://vmp.test.xiaopeng.local/api/vehicle/xbom/materialId/list"
+
     if envoptions.strip() == '2':
         header = {
             "Content-Type": "application/json",
@@ -23,14 +27,54 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions):
             "Content-Type": "application/json",
             "Cookie": "{}".format(vmp_pcookie)
         }
-    body = {
-        "vin": "{}".format(vin),
-        "cduId": "{}".format(cduid),
-        "iccid": "{}".format(iccid),
-        "actColor": "霜月白",
-        "actColorCode": "1B",
-        "vehicleTypeCode": "{}".format(vehicleTypeCode)
-    }
+    body = {}
+    if materialNum:
+        if envoptions.strip() == '2':
+            res = requests.get(url= url_test_material_list,params={"vehicleTypeCode":vehicleTypeCode},headers=header)
+            logger().info("输出车型对应的物料列表：{}".format(res.json()))
+            res = res.json().get("data", [])
+            if materialNum in res:
+                body = {
+                    "vin": "{}".format(vin),
+                    "cduId": "{}".format(cduid),
+                    "iccid": "{}".format(iccid),
+                    "actColor": "霜月白",
+                    "actColorCode": "1B",
+                    "vehicleTypeCode": "{}".format(vehicleTypeCode),
+                    "vehicleMaterielId": "{}".format(materialNum)
+                }
+            else:
+                logger().warn("当前车型不存在该物料编码：{}".format(res.json()))
+                return {"code": 400, "message": "车辆信息注册失败，物料编码不匹配！",
+                        "data": {"车型": vehicleTypeCode,"物料":materialNum}}
+        else:
+            res = requests.get(url=url_material_list, params={"vehicleTypeCode":vehicleTypeCode}, headers=header)
+            logger().info("输出车型对应的物料列表：{}".format(res.json()))
+            res = res.json().get("data", [])
+            if materialNum in res:
+                body = {
+                    "vin": "{}".format(vin),
+                    "cduId": "{}".format(cduid),
+                    "iccid": "{}".format(iccid),
+                    "actColor": "霜月白",
+                    "actColorCode": "1B",
+                    "vehicleTypeCode": "{}".format(vehicleTypeCode),
+                    "vehicleMaterielId": "{}".format(materialNum)
+                }
+            else:
+                logger().warn("当前车型不存在该物料编码：{}".format(res.json()))
+                return {"code": 400, "message": "车辆信息注册失败，物料编码不匹配！",
+                        "data": {"车型": vehicleTypeCode,"物料":materialNum}}
+
+    # body = {
+    #     "vin": "{}".format(vin),
+    #     "cduId": "{}".format(cduid),
+    #     "iccid": "{}".format(iccid),
+    #     "actColor": "霜月白",
+    #     "actColorCode": "1B",
+    #     "vehicleTypeCode": "{}".format(vehicleTypeCode),
+    #     "vehicleMaterielId": "{}".format(materialNum)
+    # }
     # logging.info("车辆请求提示：{}".format(body))
     try:
         # 请求注册车辆接口,并拿取响应结果

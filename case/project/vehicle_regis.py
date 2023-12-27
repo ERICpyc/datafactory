@@ -5,7 +5,7 @@ from base.utiles import random_veh
 from base.config import logger
 
 
-def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions=""):
+def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="", materialNum= ""):
     """
 	@api {post} /vehicle_regis 【国内】车管新车型车辆登记
 	@apiName vehicle_regis
@@ -15,6 +15,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-25位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
+	@apiParam {String} [materialNum=EDAL103] 在车管已登记的7-11位物料编码，
 	@apiParam {String} vehicleTypeCode=EA 车型编码(填写EA这种)，EA(E38)、EF(E28A)，FA(F30),HA(H93)，FC(F57)，DM(D01)以及后续车管登记的新车型
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}
@@ -44,7 +45,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
                 ret1 = tbox_regis.tbox_regis(iccid,envoptions)
                 if ret1.get('code') == 200:
                     ret2 = cdu_regis.cdu_regis(cduid,envoptions)
-                    ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode,envoptions)
+                    ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode,envoptions,materialNum)
                     return ret3
                 elif ret1.get('code') == 400:
                     logger().warning("ICCID登记失败，ICCID已存在")
@@ -57,7 +58,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="")
                 return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填EA、EF，FA,HA,FC,DM之一"}
         else:
             logger().warning("环境入参异常")
-            return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1或2，或留空"}
+            return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1（预发）或2（测试），或留空默认预发布环境"}
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='ED', vin='', cduid='', iccid='',envoptions='2')
+    vehicle_regis(vehicleTypeCode='DM', vin='', cduid='', iccid='',envoptions='', materialNum= "DMCR010")
