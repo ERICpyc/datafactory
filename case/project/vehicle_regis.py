@@ -43,16 +43,17 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="",
         if envoptions.strip() == '1' or envoptions.strip() == '2' or envoptions.strip() =="":
             if vehicleTypeCode in new_vtype:
                 ret1 = tbox_regis.tbox_regis(iccid,envoptions)
-                if ret1.get('code') == 200:
-                    ret2 = cdu_regis.cdu_regis(cduid,envoptions)
-                    ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode,envoptions,materialNum)
-                    return ret3
-                elif ret1.get('code') == 400:
-                    logger().warning("ICCID登记失败，ICCID已存在")
-                    return {"code": 400, "message": "ICCID登记失败", "data": "ICCID登记失败，ICCID:" + iccid + "已存在，请联系管理员处理"}
-                else:
+                try:
+                    if ret1.get('code') == 200:
+                        ret2 = cdu_regis.cdu_regis(cduid,envoptions)
+                        ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode,envoptions,materialNum)
+                        return ret3
+                    elif ret1.get('code') == 400:
+                        logger().warning("ICCID登记失败，ICCID已存在")
+                        return {"code": 400, "message": "ICCID登记失败", "data": "ICCID登记失败，ICCID:" + iccid + "已存在，请联系管理员处理"}
+                except Exception as e:
                     logger().error("ICCID登记异常")
-                    return {"code": ret1.get('code'), "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理"}
+                    return {"code": ret1.get('code'), "message": "ICCID登记失败", "data": "ICCID登记异常，请联系管理员处理", "errmsg":"{}".format(e)}
             else:
                 logger().warning("车型不匹配")
                 return {"code": 400, "message": "车型未匹配,登记失败", "data": "车型必填EA、EF，FA,HA,FC,DM之一"}
@@ -61,4 +62,4 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="",
             return {"code": 400, "message": "环境填写错误", "data": "环境填写错误，请填写1（预发）或2（测试），或留空默认预发布环境"}
 
 if __name__ == "__main__":
-    vehicle_regis(vehicleTypeCode='DM', vin='', cduid='', iccid='',envoptions='', materialNum= "DDD0001")
+    vehicle_regis(vehicleTypeCode='HA', vin='', cduid='', iccid='',envoptions='', materialNum= "")
