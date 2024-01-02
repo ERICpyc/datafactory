@@ -42,14 +42,14 @@ def tbox_regis(iccid,envoptions):
             logger().info(f"---注册TBOX成功，输出断言结果：{iccid}！！！")
             pil_bind.pil_bind(iccid)
             return {"code": 200, "message": "ICCID登记成功", "data": "ICCID登记成功"}
-        except:
+        except Exception as e:
             responseCode = res_json.get("code")
             assert responseCode == 400
             logger().warning("TBOX注册失败，断言失败情况，TBOX已存在："+ iccid)
             logger().warning("TBOX信息存在，跳过tbox注册！！！")
-            return {"code": 400, "message": "登记失败，iccid已存在", "data": "登记失败，iccid已存在"}
+            return {"code": 400, "message": "登记失败，iccid已存在", "data": "登记失败，iccid已存在", "errmsg":"{}".format(e)}
     except Exception as e:
         logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
-        return {"code": 500, "message": "登记失败，TBOX信息异常", "data": "登记失败，TBOX信息异常"}
+        return {"code": 500, "message": "登记失败，TBOX信息异常", "data": "登记失败，TBOX信息异常", "errmsg":"{}".format(e)}
 
