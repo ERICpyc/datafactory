@@ -1,7 +1,7 @@
 import requests
 from base.config import logger, vmp_pcookie, vmp_tcookie
 from base.utiles import ob_value_choice
-
+import traceback
 
 def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
     # 预发布接口
@@ -196,4 +196,4 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
         logger().error("---！！注册修改车辆都失败，输出异常信息：{}！！---".format(e))
         logger().error("---！！注册修改车辆都失败，输出异常vin：{}！！---".format(vin))
         return {"code": 500, "message": "VIN登记异常",
-                "data": {"vin": vin, "cduid": cduid, "iccid": iccid, "车型": vehicleTypeCode}, "errmsg":e}
+                "data": {"vin": vin, "cduid": cduid, "iccid": iccid, "车型": vehicleTypeCode}, "errmsg":"{}".format(e)}
