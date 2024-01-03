@@ -28,7 +28,8 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
             "Cookie": "{}".format(vmp_pcookie)
         }
     body = {}
-    if materialNum:
+
+    if materialNum.strip():
         if envoptions.strip() == '2':
             res = requests.get(url= url_test_material_list,params={"vehicleTypeCode":vehicleTypeCode},headers=header)
             logger().info("输出车型对应的物料列表：{}".format(res.json()))
@@ -65,17 +66,17 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
                 logger().warn("当前车型不存在该物料编码：{}".format(res))
                 return {"code": 400, "message": "车辆信息注册失败，物料编码不匹配！",
                         "data": {"车型": vehicleTypeCode,"物料":materialNum}}
+    else:
+        body = {
+            "vin": "{}".format(vin),
+            "cduId": "{}".format(cduid),
+            "iccid": "{}".format(iccid),
+            "actColor": "霜月白",
+            "actColorCode": "1B",
+            "vehicleTypeCode": "{}".format(vehicleTypeCode),
 
-    # body = {
-    #     "vin": "{}".format(vin),
-    #     "cduId": "{}".format(cduid),
-    #     "iccid": "{}".format(iccid),
-    #     "actColor": "霜月白",
-    #     "actColorCode": "1B",
-    #     "vehicleTypeCode": "{}".format(vehicleTypeCode),
-    #     "vehicleMaterielId": "{}".format(materialNum)
-    # }
-    # logging.info("车辆请求提示：{}".format(body))
+        }
+        logger().info("车辆请求提示：{}".format(body))
     try:
         # 请求注册车辆接口,并拿取响应结果
         if envoptions.strip() == '2':
