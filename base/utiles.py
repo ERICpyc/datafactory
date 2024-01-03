@@ -68,4 +68,4 @@ def concat_dict_to_string(data):
     """将字典中的键值对拼接成字符串，以分号分隔键值对，等号分隔键和值"""
     return ';'.join([f"{k}={v}" for k, v in data.items()])
 
-# def vmodel_color(vtype):
+print(random_veh())
