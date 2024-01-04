@@ -3,7 +3,7 @@ from base.utiles import random_veh,getv_info
 from base.config import logger
 
 
-def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions=""):
+def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="", materialNum= ""):
     """
 	@api {post} /old_model_veh_regis 【国内】车管D2X,E28,D55旧车型车辆登记
 	@apiName old_model_veh_regis
@@ -13,6 +13,7 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptio
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-25位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
+	@apiParam {String} [materialNum=EDAL103] 在车管已登记的7-11位物料编码，
 	@apiParam {String} vehicleTypeCode=ED 车型编码， ED(E28),DF(D55),DB(D20),DC(D21),DE(D20P),DG(D22)之一
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}
@@ -40,9 +41,9 @@ def old_model_veh_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptio
     else:
         if envoptions.strip() == '1' or envoptions.strip() == '2' or envoptions.strip() == "":
             if vehicleTypeCode in old_vtype:
-                ret1 = tbox_cdu_bind.tbox_cdu_bind(cduid, iccid,envoptions)
+                ret1 = tbox_cdu_bind.tbox_cdu_bind(cduid, iccid, envoptions)
                 if ret1.get('code') == 200:
-                    ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode,envoptions)
+                    ret3 = vehicle_bind.vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions,materialNum)
                     return ret3
                 elif ret1.get('code') == 400:
                     logger().warning("大屏登记失败，ICCID已存在")
