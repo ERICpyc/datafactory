@@ -42,7 +42,7 @@ def tbox_cdu_bind(cduid,iccid,envoptions):
         logger().info(f"---注册大屏成功，输出断言结果：{cduid,iccid}！！！")
         pil_bind.pil_bind(iccid)
         return {"code": 200, "message": "CDUID,登记成功", "data": "CDUID,ICCID绑定登记成功"}
-    except:
+    except AssertionError as e:
         responseCode = res_json.get("code")
         responsemsg = res_json.get("msg")
         assert responseCode == 400
@@ -60,7 +60,10 @@ def tbox_cdu_bind(cduid,iccid,envoptions):
         vin1 = val.get("vin")
         logger().info("大屏信息存在，走修改大屏接口！！！")
         return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + responsemsg+" 占用车辆："+vin1}
-    # except Exception as e:
-    #     logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
-    #     logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(cduid))
-    #     return {"code": 500, "message": "登记失败，大屏信息异常", "data": "登记失败，大屏信息异常，请检查"}
+    except Exception as e:
+        responseCode = res_json.get("code")
+        assert responseCode == 302 or 500
+        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
+        logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
+        return {"code": responseCode, "message": "登记失败，大屏信息异常", "data": "登记失败，大屏登记{}信息异常".format(cduid),
+                "errmsg": "{}".format(e)}
