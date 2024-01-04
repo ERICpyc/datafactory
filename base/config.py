@@ -19,7 +19,7 @@ def logger():
 
 
 # 读取文本文件的内容
-with open('/root/liwl5/FunDataFactory/data-factory-vehicle/base/cookies.txt') as f:
+with open('E:/data-factory-pengyc/base/cookies.txt') as f:
     content = f.read()
 
 # 从文本中解析出 t_cookie、p_cookie 和 s_cookie 的值

@@ -36,22 +36,28 @@ def tbox_regis(iccid,envoptions):
     logger().info("输出注册TBOX接口响应数据：{}".format(res_json))
 
         # 断言走分支
-    try:
-        responseCode = res_json.get("code")
-        assert responseCode == 200
-        logger().info(f"---注册TBOX成功，输出断言结果：{iccid}！！！")
-        pil_bind.pil_bind(iccid)
-        return {"code": responseCode, "message": "ICCID登记成功", "data": "ICCID登记成功"}
-    except AssertionError as e:
-        responseCode = res_json.get("code")
-        assert responseCode == 400
-        logger().warning("TBOX注册失败，断言失败情况，TBOX已存在："+ iccid)
-        logger().warning("TBOX信息存在，跳过tbox注册！！！")
-        return {"code": responseCode, "message": "登记失败，iccid已存在", "data": "登记失败，iccid已存在", "errmsg":"{}".format(e)}
-    except Exception as e:
-        responseCode = res_json.get("code")
-        assert responseCode == 302 or 500
-        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
+    responseCode = res_json.get("code")
+    print(type(responseCode))
+    # try:
+    if responseCode == 200:
+            logger().info(f"---注册TBOX成功，输出断言结果：{iccid}！！！")
+            pil_bind.pil_bind(iccid)
+            return {"code": 200, "message": "ICCID登记成功", "data": "ICCID登记成功"}
+    # except AssertionError as e:
+        # responseCode = res_json.get("code")
+    elif responseCode == 400:
+            logger().warning("TBOX注册失败，断言失败情况，TBOX已存在：" + iccid)
+            logger().warning("TBOX信息存在，跳过tbox注册！！！")
+            return {"code": 400, "message": "登记失败，iccid已存在", "data": "登记失败，iccid已存在"}
+
+    # except Exception as e:
+        # responseCode = res_json.get("code")
+    elif responseCode == 302:
+        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---")
         logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
-        return {"code": responseCode, "message": "登记失败，TBOX信息异常", "data": "登记失败，TBOX{}信息异常".format(iccid), "errmsg":"{}".format(e)}
+        return {"code": 302, "message": "登记失败，鉴权失败", "data": "登记失败，TBOX{}信息异常".format(iccid)}
+    else:
+        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---")
+        logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
+        return {"code": 500, "message": "登记失败，TBOX信息异常", "data": "登记失败，TBOX{}信息异常".format(iccid)}
 
