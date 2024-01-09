@@ -21,6 +21,7 @@ def logger():
 # 读取文本文件的内容
 with open('E:/data-factory-pengyc/base/cookies.txt') as f:
     content = f.read()
+    f.close()
 
 # 从文本中解析出 t_cookie、p_cookie 和 s_cookie 的值
 t_cookie_match = re.search(r"t_cookie = '([^']*)'", content)
