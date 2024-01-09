@@ -36,17 +36,16 @@ def tbox_cdu_bind(cduid,iccid,envoptions):
     res_json = res.json()
     logger().info("输出注册大屏接口响应数据：{}".format(res_json))
     # 断言走分支
-    try:
-        responseCode = res_json.get("code")
-        assert responseCode == 200
+    responseCode = res_json.get("code")
+
+    if responseCode == 200:
         logger().info(f"---注册大屏成功，输出断言结果：{cduid,iccid}！！！")
         pil_bind.pil_bind(iccid)
         return {"code": 200, "message": "CDUID,登记成功", "data": "CDUID,ICCID绑定登记成功"}
-    except AssertionError as e:
-        responseCode = res_json.get("code")
-        responsemsg = res_json.get("msg")
-        assert responseCode == 400
-        logger().info(f"大屏注册失败，断言失败情况，大屏已存在：{responsemsg}")
+
+    elif responseCode == 400:
+
+        logger().info(f"大屏注册失败，断言失败情况，大屏已存在")
         param = {
             "cduId": "{}".format(cduid)
         }
@@ -59,11 +58,12 @@ def tbox_cdu_bind(cduid,iccid,envoptions):
         val = res_sou_json.get("data")
         vin1 = val.get("vin")
         logger().info("大屏信息存在，走修改大屏接口！！！")
-        return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + responsemsg+" 占用车辆："+vin1}
-    except Exception as e:
-        responseCode = res_json.get("code")
-        assert responseCode == 302 or 500
-        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---".format(e))
+        return {"code": 400, "message": "登记失败，cduid已存在", "data": "登记失败" + " 占用车辆："+vin1}
+    elif responseCode == 302:
+        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---")
         logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
-        return {"code": responseCode, "message": "登记失败，大屏信息异常", "data": "登记失败，大屏登记{}信息异常".format(cduid),
-                "errmsg": "{}".format(e)}
+        return {"code": 302, "message": "登记失败，鉴权失败", "data": "登记失败，TBOX{}信息异常".format(iccid)}
+    else:
+        logger().error("---！！注册修改TBOX都失败，输出异常信息：{}！！---")
+        logger().error("---！！注册修改TBOX都失败，输出异常tbox：{}！！---".format(iccid))
+        return {"code": 500, "message": "登记失败，大屏TBOX信息异常", "data": "登记失败，大屏TBOX信息异常"}
