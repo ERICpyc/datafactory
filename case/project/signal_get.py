@@ -21,8 +21,8 @@ def signal_get(vin="", signal="", startts="", endts=""):
 	"""
 
     #  判断时间间隔
-    st = datetime.datetime.fromtimestamp(float(startts))
-    et = datetime.datetime.fromtimestamp(float(endts))
+    st = datetime.datetime.fromtimestamp(int(startts))
+    et = datetime.datetime.fromtimestamp(int(endts))
     t_diff = abs(et - st)
 
     if not vin or not signal or not startts or not endts:
@@ -43,4 +43,4 @@ def signal_get(vin="", signal="", startts="", endts=""):
             return {"code": 500, "message": "查询异常，返回信息如下", "data": "查询异常，返回信息{}".format(ret1)}
 
 
-signal_get(vin='L1NNSGHA9NB000011', signal='A2B_Audio_Source_St', startts='1705425600', endts='1705426800')
+signal_get(vin='L1NNSGHA9NB000011', signal='BMS_BattSOC_Disp', startts='1705425600', endts='1705426800')

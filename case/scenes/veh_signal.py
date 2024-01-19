@@ -27,6 +27,7 @@ def signal_kv_get(vin, startts, endts, signal):
     max_wait_time = 60
     interval = 3
     current_wait_time = 0
+    ascDownloadUrl = None
     while current_wait_time < max_wait_time:
         res_result = requests.get(url=url_result, headers=headers, params=params)
         logger.info(res_result.json())
