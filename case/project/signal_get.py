@@ -16,8 +16,8 @@ def signal_get(vin="", signal="", startts="", endts=""):
 	@apiPermission 彭煜尘
 	@apiParam {String} vin=L1NNSGHB5NA000XXX 17位车架号
 	@apiParam {String} signal=BMS_BattSOC_Disp 需要查询的信号名，请在车管信号管理界面获取，多个信号英文逗号隔开
-	@apiParam {String} startts 开始时间，10位秒级时间戳，注意开始到结束时间最大1小时！
-	@apiParam {String} endts 结束时间，10位秒级时间戳，注意开始到结束时间最大1小时！
+	@apiParam {String} startts=1705425600 开始时间，10位秒级时间戳，注意开始到结束时间最大1小时！
+	@apiParam {String} endts=1705426800 结束时间，10位秒级时间戳，注意开始到结束时间最大1小时！
 	"""
 
     #  判断时间间隔

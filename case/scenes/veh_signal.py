@@ -120,4 +120,4 @@ def signal_kv_get(vin, startts, endts, signal):
 
     output_json = json.dumps(output, indent=4)
     logger.info(output_json)
-    return {"code": 200, "message": "返回数据成功", "data": "{}".format(output_json)}
+    return {"code": 200, "message": "返回数据成功", "data": output_json}
