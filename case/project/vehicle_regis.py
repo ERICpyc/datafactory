@@ -15,7 +15,7 @@ def vehicle_regis(vehicleTypeCode="", vin="", cduid="", iccid="", envoptions="",
 	@apiParam {String} [vin=L1NNSGHB5NA000XXX] 17位车架号
 	@apiParam {String} [cduid=XPENGE380700354739011XXX] 21-25位大屏硬件号
 	@apiParam {String} [iccid=89861121290032272XXX] 20位TBOX编号
-	@apiParam {String} [materialNum=EDAL103] 在车管已登记的7-11位物料编码，
+	@apiParam {String} [materialNum=EDAL103] 在车管已登记的7位物料编码，注意物料编码和车型要存在映射关系。
 	@apiParam {String} vehicleTypeCode=EA 车型编码(填写EA这种)，EA(E38)、EF(E28A)，FA(F30),HA(H93)，FC(F57)，DM(D01)以及后续车管登记的新车型
 	"""
     veh_info = {"vin": "", "cduid": "", "iccid": "", "vehicleTypeCode": ""}

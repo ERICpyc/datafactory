@@ -198,3 +198,6 @@ def vehicle_bind(iccid, cduid, vin, vehicleTypeCode, envoptions, materialNum):
         logger().error("---！！注册修改车辆都失败，输出异常vin：{}！！---".format(vin))
         return {"code": 500, "message": "VIN登记异常",
                 "data": {"vin": vin, "cduid": cduid, "iccid": iccid, "车型": vehicleTypeCode}, "errmsg":"{}".format(e)}
+
+# def veh_account_bind():
+#
