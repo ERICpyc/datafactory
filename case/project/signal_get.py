@@ -25,7 +25,7 @@ def signal_get(vin="", signal="", startts="", endts=""):
 
     if (vin is None or vin.strip() == "") or (signal is None or signal.strip() == "") or (startts is None or startts.strip() == "") or (endts is None or endts.strip() == ""):
         logger.warning("必填信息未填写")
-        return {"code": 400, "message": "必填参数未填写", "data": "必填参数未填写，请检查车型是否填写正确！"}
+        return {"code": 400, "message": "必填参数未填写", "data": "必填参数未填写，请检查必填是否填写正确！"}
 
     # t_diff = abs(datetime.datetime.fromtimestamp(float(endts)) - datetime.datetime.fromtimestamp(float(startts)))
     elif len(vin) != 17 or len(startts) != 10 or len(
@@ -44,4 +44,4 @@ def signal_get(vin="", signal="", startts="", endts=""):
             return {"code": 500, "message": "查询异常，返回信息如下", "data": "查询异常，返回信息{}".format(ret1)}
 
 
-signal_get(vin='L1NNSGHA9NB000011', signal='BMS_BattSOC_Disp', startts='1705425600', endts='')
+signal_get(vin='L1NNSGHA9NB000011', signal='BMS_BattSOC_Disp', startts='1706494247', endts='1706496107')
