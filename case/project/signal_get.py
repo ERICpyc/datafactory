@@ -38,6 +38,7 @@ def signal_get(vin="", signal="", startts="", endts=""):
         if ret1 == 200:
             # 车辆存在且入参正确，进入查询流程
             ret1 = veh_signal.signal_kv_get(vin, startts, endts, signal)
+            return ret1
         elif ret1 == 400:
             return {"code": 400, "message": "vin不存在", "data": "车辆{}信息不存在，请检查".format(vin)}
         else:
