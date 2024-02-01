@@ -9,7 +9,7 @@ import json
 
 
 def signal_kv_get(vin, startts, endts, signal):
-    # 发起新年查询，获取taskid
+    # 发起信号查询，获取taskid
     url_query = 'https://rmp.xiaopeng.com/api/ican_data/query'
     params = {"vin": vin, "beginTime": startts, "endTime": endts}
     headers = {"Cookie": vmp_scookie}
@@ -24,7 +24,7 @@ def signal_kv_get(vin, startts, endts, signal):
         max_wait_time = 60
         interval = 3
         current_wait_time = 0
-        ascDownloadUrl = None
+
         while current_wait_time < max_wait_time:
             res_result = requests.get(url=url_result, headers=headers, params=params)
             logger.info(res_result.json())
@@ -83,7 +83,7 @@ def signal_kv_get(vin, startts, endts, signal):
 
                             output_json = json.dumps(output, indent=4)
                             logger.info(output_json)
-                            return {"code": 200, "message": "返回数据成功", "data": output_json}
+                            return {"code": 200, "message": "返回数据成功", "data": "数据"}
 
                         time.sleep(interval)
                         current_wait_time += interval
