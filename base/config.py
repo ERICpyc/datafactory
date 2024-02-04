@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import logging,sys
-from base.cookie_store import t_cookie,p_cookie,s_cookie
-import os
-
-
+import logging
+import re
+import platform
 
 
 def logger():
@@ -21,7 +19,28 @@ def logger():
     return logger
 
 
+# 判断os读取文本文件的内容
+file_path = ''
+current_os = platform.system()
+if current_os == 'Windows':
+    file_path = 'E:/data-factory-pengyc/base/cookies.txt'
+elif current_os == 'Linux':
+    file_path = '/root/liwl5/FunDataFactory/data-factory-vehicle/base/cookies.txt'
 
+if file_path:
+    with open(file_path) as f:
+        content = f.read()
+        f.close()
+
+# 从文本中解析出 t_cookie、p_cookie 和 s_cookie 的值
+t_cookie_match = re.search(r"t_cookie = '([^']*)'", content)
+p_cookie_match = re.search(r"p_cookie = '([^']*)'", content)
+s_cookie_match = re.search(r"s_cookie = '([^']*)'", content)
+
+# 将解析出的值存储到字符串变量中
+t_cookie = t_cookie_match.group(1) if t_cookie_match else ''
+p_cookie = p_cookie_match.group(1) if p_cookie_match else ''
+s_cookie = s_cookie_match.group(1) if s_cookie_match else ''
 
 # t_cookie = os.environ.get('T_COOKIE')
 # p_cookie = os.environ.get('P_COOKIE')
@@ -48,6 +67,5 @@ if s_cookie:
     vmp_scookie = s_cookie
 else:
     print("未找到 S_COOKIE 参数")
-
 
 header_js = {"Content-Type": "application/json"}

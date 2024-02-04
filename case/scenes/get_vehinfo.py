@@ -65,3 +65,20 @@ def get_siminfo(iccid):
         return {"code": 400, "message": "查询失败，返回信息如下", "data": res_json}
     else:
         return {"code": 500, "message": "查询异常，返回信息如下", "data": res_json}
+
+def get_vehinfo(vin):
+    url = "https://vmp.xiaopeng.com/api/vehicle/info/vin?vin={}".format(vin)
+    headers = {
+        "Cookie":"{}".format(vmp_scookie)
+    }
+    res = requests.get(url=url, headers= headers, verify=False)
+    logger().info("输出查询vin信息：{}".format(res.json()))
+    return res.json()["code"]
+    # if res.json()["code"] == 200:
+    #     veh_info = res.json()["data"]["vin"]
+    #     return veh_info
+    # elif res.json()["code"] == 400:
+    #     return False
+    # else:
+    #     return {"code": 500, "message": "查询异常，返回信息如下", "data": res.json()}
+
